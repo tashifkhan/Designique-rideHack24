@@ -19,7 +19,7 @@ function About() {
       </div>
       <div >
         <div className="wysiwyg w-600 h-600 align-center justify-center">
-          Welcome to [Placeholder], where we redefine the way you do business
+          Welcome to Designique, where we redefine the way you do business
           and shop online. As a pioneering platform serving both B2B and B2C
           markets, we are committed to establishing a secure, reliable, and
           efficient environment for all stakeholders. Our dedication to security
@@ -27,7 +27,7 @@ function About() {
           professional encryption measures to ensure that every transaction is
           protected. With the integration of robust functionalities like
           Razorpay, we streamline payment processes, making them seamless and
-          hassle-free. Trust in [Placeholder] to be your partner in commerce,
+          hassle-free. Trust in Designique to be your partner in commerce,
           providing a trusted platform where opportunities are endless and every
           interaction is a step toward mutual success. Join us in crafting a
           brighter future in ecommerce, where your security and success are

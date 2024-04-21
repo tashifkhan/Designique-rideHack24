@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import  {faLongArrowDown, }  from '@fortawesome/free-solid-svg-icons'
 const LandingPage = () => {
-  const titles = ["Placeholders", "Innovative", "MarketPlace"];
+  const titles = ["Designique", "Innovative", "MarketPlace"];
   const below_border = [
     "For budding designers and surplus manufacturers",
     "Extensive solution from designing, manufacturing to sale",

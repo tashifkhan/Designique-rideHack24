@@ -14,13 +14,11 @@ function Land() {
   const locomotiveScroll = new LocomotiveScroll();
   return (
     <div className="w-full min-h-screen  bg-[#FBF3D5]">
-      {/* <Navbar /> */}
       <LandingPage />
       <Marque />  
       <About />
       <Eyes />
       <Featured />
-      {/* <Cards /> */}
       <Footer />
     </div>
   );

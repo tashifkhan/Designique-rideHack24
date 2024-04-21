@@ -6,6 +6,8 @@ import tashif from './images/tashif-avatar.jpg';
 import adarsh from './images/adarsh-avatar.jpg';
 import dhruv from './images/dhruv-avatar.jpg';
 import adhiraj from './images/adhiraj-avatar.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import  {faLongArrowDown, }  from '@fortawesome/free-solid-svg-icons'
 
 const TeamSection = () => {
     return (
@@ -21,17 +23,14 @@ const TeamSection = () => {
                     </div>
                     <div className="content">
                         <div className="contentBx">
-                            <h3>Aman Tyagi <br /><span>The Hawk</span></h3>
+                            <h3>Aman Tyagi <br /><span>#SmartWorker</span></h3>
                         </div>
                         <ul className="sci">
-                            <li style={{ '--i': 1 }}>
-                                <a href="#"><i className="fa-brands fa-instagram"></i></a>
+                        <li style={{ '--i': 1 }}>
+                                <a href="https://github.com/AmanTyagi3123"><i class="bi bi-github"></i></a>
                             </li>
                             <li style={{ '--i': 2 }}>
-                                <a href="#"><i className="fa-brands fa-github"></i></a>
-                            </li>
-                            <li style={{ '--i': 3 }}>
-                                <a href="#"><i className="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://www.linkedin.com/in/aman-tyagi-677377270?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="bi bi-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -42,17 +41,14 @@ const TeamSection = () => {
                     </div>
                     <div className="content">
                         <div className="contentBx">
-                            <h3>Angel <br /><span>Learner</span></h3>
+                            <h3>Angel <br /><span>#Entrepreneur</span></h3>
                         </div>
                         <ul className="sci">
                             <li style={{ '--i': 1 }}>
-                                <a href="#"><i className="fa-brands fa-instagram"></i></a>
+                                <a href="https://github.com/angelsinghal"><i class="bi bi-github"></i></a>
                             </li>
                             <li style={{ '--i': 2 }}>
-                                <a href="#"><i className="fa-brands fa-github"></i></a>
-                            </li>
-                            <li style={{ '--i': 3 }}>
-                                <a href="#"><i className="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://www.linkedin.com/in/angel-singhal-44b372248?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="bi bi-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -63,17 +59,14 @@ const TeamSection = () => {
                     </div>
                     <div className="content">
                         <div className="contentBx">
-                            <h3>Tashif <br /><span>The Orator</span></h3>
+                            <h3>Tashif <br /><span>#Visionary</span></h3>
                         </div>
                         <ul className="sci">
                             <li style={{ '--i': 1 }}>
-                                <a href="#"><i className="fa-brands fa-instagram"></i></a>
+                                <a href="https://github.com/tashifkhan"><i class="bi bi-github"></i></a>
                             </li>
                             <li style={{ '--i': 2 }}>
-                                <a href="#"><i className="fa-brands fa-github"></i></a>
-                            </li>
-                            <li style={{ '--i': 3 }}>
-                                <a href="#"><i className="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://www.linkedin.com/in/tashif-ahmad-khan-982304244?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="bi bi-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -88,17 +81,14 @@ const TeamSection = () => {
                     </div>
                     <div className="content">
                         <div className="contentBx">
-                            <h3>Adarsh <br /><span>Beast</span></h3>
+                            <h3>Adarsh <br /><span>#Designer</span></h3>
                         </div>
                         <ul className="sci">
                             <li style={{ '--i': 1 }}>
-                                <a href="#"><i className="fa-brands fa-instagram"></i></a>
+                                <a href="https://github.com/adarshsharma3"><i class="bi bi-github"></i></a>
                             </li>
                             <li style={{ '--i': 2 }}>
-                                <a href="#"><i className="fa-brands fa-github"></i></a>
-                            </li>
-                            <li style={{ '--i': 3 }}>
-                                <a href="#"><i className="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://www.linkedin.com/in/adarsh-sharma-3bb87027b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="bi bi-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -109,17 +99,14 @@ const TeamSection = () => {
                     </div>
                     <div className="content">
                         <div className="contentBx">
-                            <h3>Dhruv <br /><span>kindness Overloaded</span></h3>
+                            <h3>Dhruv <br /><span>#CodeHustler</span></h3>
                         </div>
                         <ul className="sci">
                             <li style={{ '--i': 1 }}>
-                                <a href="#"><i className="fa-brands fa-instagram"></i></a>
+                                <a href="https://github.com/dhruvmishra1020"><i class="bi bi-github"></i></a>
                             </li>
                             <li style={{ '--i': 2 }}>
-                                <a href="#"><i className="fa-brands fa-github"></i></a>
-                            </li>
-                            <li style={{ '--i': 3 }}>
-                                <a href="#"><i className="fa-brands fa-linkedin-in"></i></a>
+                                <a href="#"><i class="bi bi-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -130,17 +117,14 @@ const TeamSection = () => {
                     </div>
                     <div className="content">
                         <div className="contentBx">
-                            <h3>Adhiraj <br /><span></span>Content Finder</h3>
+                            <h3>Adhiraj <br /><span>#MultiTasker</span></h3>
                         </div>
                         <ul className="sci">
                             <li style={{ '--i': 1 }}>
-                                <a href="#"><i className="fa-brands fa-instagram"></i></a>
+                                <a href="https://github.com/Adhiraj-3"><i class="bi bi-github"></i></a>
                             </li>
                             <li style={{ '--i': 2 }}>
-                                <a href="#"><i className="fa-brands fa-github"></i></a>
-                            </li>
-                            <li style={{ '--i': 3 }}>
-                                <a href="#"><i className="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://www.linkedin.com/in/adhiraj-gupta-777a7a270?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="bi bi-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>

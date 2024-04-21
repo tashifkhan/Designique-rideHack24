@@ -60,8 +60,8 @@ function Hero() {
                             <i className="bi bi-bookmark-plus-fill"></i>
                         </Link>
                     </div>
+                    <div className="subtitle"><span className="slogan">The Collections</span></div>
                     <div className="subtitle">
-                        <span className="slogan">The Collections</span>
                         <span className={`number ${item.active ? "active": undefined}`}>{item._id}</span>
                     </div>
                 </div>

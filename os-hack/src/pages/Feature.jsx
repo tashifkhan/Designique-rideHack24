@@ -2,7 +2,7 @@ import { motion, useAnimation } from "framer-motion";
 import { Link } from 'react-router-dom'
 import Con from "./images/Consumer.jpeg";
 import Des from "./images/Designer.jpeg";
-import Man from "./images/Manufacturer.jpeg";
+import Man from "./images/Manufacturer.jpg";
 import aboutus from './images/AboutUs.jpg';
 
 function Featured() {
@@ -30,8 +30,8 @@ function Featured() {
             onHoverEnd={() => handleHoverEnd(0)}
             className="cardContainer relative w-1/2 h-[75vh]  "
           >
-            <Link to='/manufacture'><li className="text-4xl font-semibold mb-2">EXPLORE THE BUILDER</li></Link>
-            <h1 className="absolute text-[#5DA7AE] flex overflow-hidden z-[9] translate-x-1/2 top-1/2 -translate-y-1/2 leading-none tracking-tighter right-0 text-8xl ">
+            <Link to='/manufacture'><li className="text-4xl font-semibold mb-2">EXPLORE THE MANUFACTURER</li></Link>
+            <h1 className="absolute text-[#3C5B6F] flex overflow-hidden z-[9] translate-x-1/2 top-1/2 -translate-y-1/2 leading-none tracking-tighter right-0 text-8xl ">
               {"MANUFACTURER".split("").map((item, index) => (
                 <motion.span
                   key={index}
@@ -137,7 +137,7 @@ function Featured() {
           >
             <li className="text-4xl font-semibold mb-2">ABOUT US</li>
 
-            <h1 className="absolute text-[#5DA7AE] flex overflow-hidden z-[9] -translate-x-1/2 top-1/2 -translate-y-1/2 leading-none tracking-tighter left-0 text-8xl">
+            <h1 className="absolute text-[#3C5B6F] flex overflow-hidden z-[9] -translate-x-1/2 top-1/2 -translate-y-1/2 leading-none tracking-tighter left-0 text-8xl">
               {"ABOUT".split("").map((item, index) => (
                 <motion.span
                   key={index}
