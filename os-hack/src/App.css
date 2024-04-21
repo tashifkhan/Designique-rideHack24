@@ -1,0 +1,28 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root{
+  --primary: #fc2b2b;
+  --second: #fa5300;
+  --bgColor: #2d2d2d;
+}
+
+h1,
+h2,
+h4,
+p {
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+}
+
+body{
+  background: var(--bgColor);
+  font-family: 'Roboto', sans-serif;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}

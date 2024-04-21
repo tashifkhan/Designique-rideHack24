@@ -1,0 +1,149 @@
+.bg-white {
+    background-color: #000;
+  }
+  
+  .p-16 {
+    padding: 4rem;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .h-screen {
+    height: 100vh;
+  }
+  
+  .col-span-full {
+    grid-column: 1 / -1;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-4xl {
+    font-size: 2.25rem;
+  }
+  
+  .font-bold {
+    font-weight: 700;
+  }
+  
+  .text-gray-600 {
+    color: #4a5568;
+  }
+  
+  .whitespace-pre-line {
+    white-space: pre-line;
+  }
+  
+  .team-item {
+    background-color: #f4f5f6;
+    text-align: center;
+    margin: 1.25rem 0;
+    padding: 2.5rem 1.25rem 2rem 1.25rem;
+    border-radius: 0.5rem;
+    transition: all 0.25s ease-in-out;
+  }
+  
+  
+  
+  .team-item:hover {
+    background-color: #3956de;
+    /* color: white; */
+  }
+  
+  .team-item img {
+    filter: grayscale(100%); /* Convert image to black and white by default */
+    transition: filter 0.3s ease-in-out; /* Smooth transition for the filter */
+  }
+  
+  .team-item:hover img {
+    filter: grayscale(0%); /* Remove grayscale filter on hover */
+  }
+  
+  .text-xl {
+    font-size: 1.25rem;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  .text-gray-700 {
+    color: #4a5568;
+  }
+  
+  .text-gray-500 {
+    color: #6b7280;
+  }
+  
+  .rounded-full {
+    border-radius: 9999px;
+  }
+  
+  .object-cover {
+    object-fit: cover;
+  }
+  
+  .mx-4 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .w-36 {
+    width: 9rem;
+  }
+  
+  .h-36 {
+    height: 9rem;
+  }
+  
+  .mt-6 {
+    margin-top: 1.5rem;
+  }
+  
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .justify-around {
+    justify-content: space-around;
+  }
+  
+  .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  /* ... (previous styles) */
+  
+  /* Glow effect on hover */
+  .team-item:hover {
+    background-color: #3956de;
+  }
+  
+  .team-item:hover h3,
+  .team-item:hover p,
+  .team-item:hover .text-gray-500,
+  .team-item:hover .text-gray-700 {
+  color: white;
+    transition: color 0.3s ease-in-out;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #3956de, 0 0 20px #3956de, 0 0 25px #3956de, 0 0 30px #3956de, 0 0 35px #3956de;
+  }

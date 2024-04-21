@@ -1,0 +1,83 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 100px;
+    transition: 0.5s;
+    z-index: 1000 !important;
+}
+
+header.scrolled {
+    background: rgba(0, 0, 0, 0.6);
+    border-bottom: 2px solid var(--primary);
+    border-image: linear-gradient(90deg, transparent, var(--primary), transparent)
+     30;
+    backdrop-filter: blur(20px);
+    padding: 10px 100px;
+}
+
+.logo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 35px;
+    color: #ffffff;
+    letter-spacing: 2px;
+    font-weight: 800;
+    text-decoration: none;
+}
+.logos {
+    font-family: 'Great Vibes', cursive;
+    font-size: 22px;
+    color: #ffffff;
+    letter-spacing: 2px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: text-shadow 0.3s ease; /* Smooth transition for the glow effect */
+    
+}
+
+.logos:hover {
+    text-shadow: 0 0 15px #ffffff, /* White glow */
+                 0 0 25px #ffffff, /* White glow */
+                 0 0 35px #ffffff, /* White glow */
+                 0 0 45px #0080ff, /* Pink glow */
+                 0 0 75px #fbf3d5, /* Pink glow */
+                 0 0 85px #fbf3d5; /* Pink glow */
+}
+
+.nav{
+    display: flex;
+}
+
+.menu{
+    color: #ffffff;
+    font-size: 2em;
+    transition: 0.5s;
+    display: none;
+    z-index: 10000;
+}
+
+.userItems{
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.userItems .icon {
+    position: relative;
+    color: #ffffff;
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1),
+        5px 5px 15px rgba(0, 0, 0, 0.35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
