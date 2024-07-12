@@ -1,0 +1,123 @@
+.itemDetails {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 100px;
+    transition: 0.5s;
+}
+
+.itemDetails h1,
+.itemDetails h2,
+.itemDetails h4,
+.itemDetails p {
+    color: #161616;
+    font-family: 'Roboto', sans-serif;
+}
+
+.itemDetails h2 {
+    margin-bottom: 20px;
+}
+
+.itemDetails .content {
+    position: absolute;
+    top: 120px;
+    left: 100px;
+    right: 100px;
+    bottom: 80px;
+    background: #ffffff;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: 0.5s;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 20px;
+    box-shadow: -5px -5px 15px rgba(255,255,255,0.1),
+    5px 5px 15px rgba(0,0,0,0.35);
+}
+
+.itemDetails .content::-webkit-scrollbar {
+    display: none;
+}
+
+.itemImg {
+    max-height: 70vh;
+    width: 90%;
+}
+
+.itemPreview {
+    width: 90%;
+    height: 15vh;
+    box-shadow: 0 0 2ch rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+}
+
+.content .itemPrice {
+    display: flex;
+    gap: 20px;
+}
+
+.content .discount {
+    color: var(--primary);
+}
+
+.content .currentPrice {
+    font-size: 1.5rem;
+}
+
+.price{
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.size{
+    display: inline-flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.sizeItem {
+    padding: 10px 20px;
+    box-shadow: 0 0 2ch rgba(0,0,0,0.15);
+    background: #ffffff;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.sizeItem:hover,
+.sizeItem.active {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.quantity {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 120px;
+    box-shadow: 0 0 2ch rgba(0,0,0,0.15);
+    margin-bottom: 50px;
+}
+
+.qty {
+    font-size: 1.3rem;
+}
+
+.qtyButton {
+    color: var(--primary);
+}
+
+.addButton{
+    position: relative;
+    margin-top: 20px;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 25px;
+    width: 300px;
+    background: var(--primary);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 300;
+    transition: 0.5s;
+}
