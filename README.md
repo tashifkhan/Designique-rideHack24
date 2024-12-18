@@ -1,7 +1,7 @@
 # Designique: Revolutionizing Fashion Production and Distribution in India
 
 <p align="center">
-    <img src="./frontend/src/pages/images/Fav.jpeg" alt="Designique Logo" width="200" height="200">
+    <img src="./prototype/src/pages/images/Fav.jpeg" alt="Designique Logo" width="200" height="200">
 </p>
 
 **Problem Statement**
