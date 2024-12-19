@@ -24,7 +24,7 @@ export default function DesignerCard({ designer }: DesignerCardProps) {
 				className="backdrop-blur-lg bg-white/10 rounded-xl overflow-hidden border border-white/20 cursor-pointer"
 				onClick={() => setShowDetails(true)}
 			>
-				<div className="relative h-48">
+				<div className="relative h-48 md:h-64">
 					<Image
 						src={designer.coverImage}
 						alt={`${designer.name}'s Workspace`}
@@ -34,7 +34,7 @@ export default function DesignerCard({ designer }: DesignerCardProps) {
 					/>
 					<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 				</div>
-				<div className="p-6 flex flex-col justify-between">
+				<div className="p-4 md:p-6 flex flex-col justify-between">
 					<div className="flex items-center mb-4">
 						<div className="relative w-12 h-12">
 							<Image
@@ -45,15 +45,19 @@ export default function DesignerCard({ designer }: DesignerCardProps) {
 							/>
 						</div>
 						<div className="ml-4">
-							<h3 className="text-xl font-semibold text-white">
+							<h3 className="text-lg md:text-xl font-semibold text-white">
 								{designer.name}
 							</h3>
-							<p className="text-gray-400">{designer.location}</p>
+							<p className="text-gray-400 text-sm md:text-base">
+								{designer.location}
+							</p>
 						</div>
 					</div>
-					<p className="text-gray-300 mb-4">{designer.specialization}</p>
-					<div className="flex items-center justify-between">
-						<div className="flex space-x-4">
+					<p className="text-gray-300 mb-4 text-sm md:text-base">
+						{designer.specialization}
+					</p>
+					<div className="flex flex-col md:flex-row items-start md:items-center justify-between">
+						<div className="flex space-x-4 mb-2 md:mb-0">
 							<Button
 								variant="ghost"
 								size="icon"
@@ -81,7 +85,6 @@ export default function DesignerCard({ designer }: DesignerCardProps) {
 								size="icon"
 								onClick={async (e) => {
 									e.stopPropagation();
-									// Handle share
 									try {
 										if (navigator.share) {
 											await navigator.share({
