@@ -9,6 +9,7 @@ import img1 from "@/images/dhruv-avatar.jpg";
 import img2 from "@/images/tashif-avatar.jpg";
 import img3 from "@/images/angel.png";
 import img4 from "@/images/aman-avatar.jpg";
+import { Search } from "lucide-react";
 
 const BackgroundBeamsPage: React.FC = () => {
 	const cardsData = [
@@ -53,9 +54,11 @@ const BackgroundBeamsPage: React.FC = () => {
 				<div>
 					<BackgroundBeamsWithCollisionDemo />
 				</div>
-
 				{/* Fixed search bar */}
 				<div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-[600px] px-4">
+					<div className="fixed top-1/2 right-18 z-[99] text-gray-400 text-sm mb-2 text-center backdrop-blur-sm bg-white/10 p-2 rounded-xl shadow-lg w-[2.5rem]">
+						<Search size={20} className="inline-block mr-2" />
+					</div>
 					<PlaceholdersAndVanishInputDemo />
 				</div>
 
