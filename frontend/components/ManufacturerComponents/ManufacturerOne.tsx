@@ -3,7 +3,7 @@ import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-w
 export default function BackgroundBeamsWithCollisionDemo() {
   return (
     <BackgroundBeamsWithCollision>
-      <h2 className="text-2xl relative z-20 md:text-4xl lg:text-7xl font-bold text-center text-black dark:text-white font-sans tracking-tight">
+      <h2 className="text-2xl relative z-20 md:text-4xl lg:text-7xl font-bold text-center  text-white font-sans tracking-tight">
         Manufacturer
         <br />
         <div className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 py-4">

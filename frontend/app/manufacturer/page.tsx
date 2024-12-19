@@ -52,7 +52,7 @@ const BackgroundBeamsPage: React.FC = () => {
   return (
   
 
-    <div className="relative h-screen flex flex-col space-y-6">
+    <div className="relative h-screen  flex flex-col space-y-6">
   <div>
     <BackgroundBeamsWithCollisionDemo />
   </div>
