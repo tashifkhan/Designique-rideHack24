@@ -99,7 +99,6 @@ const designs: Design[] = [
 
 export default function DesignsGallery() {
 	const [activeIndex, setActiveIndex] = useState(0);
-	// const { ref } = useParallax<HTMLDivElement>({ speed: 10 });
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -123,47 +122,39 @@ export default function DesignsGallery() {
 									transition={{ delay: index * 0.2 }}
 									className="group relative"
 								>
-									<div className="relative h-80 w-full overflow-hidden rounded-xl">
-										<div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:backdrop-blur-none transition-all duration-300" />
-										<Image
-											src={design.image}
-											alt={design.title}
-											fill
-											className="object-cover transform group-hover:scale-110 transition-transform duration-500"
-										/>
-									</div>
-									<h3 className="text-xl font-semibold text-white mb-2">
-										{design.title}
-									</h3>
-									<div className="flex items-center space-x-3">
-										<div className="relative h-10 w-10 rounded-full overflow-hidden">
+									<div className="relative h-[26rem] backdrop-blur-md bg-white/5 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/20 border border-white/10">
+										<div className="relative h-72 w-full overflow-hidden rounded-xl">
 											<Image
-												src={design.designer.avatar}
-												alt={design.designer.name}
+												src={design.image}
+												alt={design.title}
 												fill
-												className="object-cover"
+												className="object-cover transform transition-transform duration-500 group-hover:scale-105"
 											/>
+											<div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 										</div>
-										<span className="text-white/90">
-											{design.designer.name}
-										</span>
+										<div className="absolute bottom-4 left-6 right-6 space-y-3">
+											<h3 className="text-xl font-semibold text-white">
+												{design.title}
+											</h3>
+											<div className="flex items-center space-x-3">
+												<div className="relative h-8 w-8 rounded-full overflow-hidden ring-2 ring-white/20">
+													<Image
+														src={design.designer.avatar}
+														alt={design.designer.name}
+														fill
+														className="object-cover"
+													/>
+												</div>
+												<span className="text-white/80 text-sm">
+													{design.designer.name}
+												</span>
+											</div>
+										</div>
 									</div>
 								</motion.div>
 							))}
 						</div>
 					</div>
-
-					{/* <div className="flex justify-center mt-12 space-x-2">
-						{designs.map((_, index) => (
-							<button
-								key={index}
-								onClick={() => setActiveIndex(index)}
-								className={`h-2 w-2 rounded-full transition-all duration-300 ${
-									index === activeIndex ? "bg-white w-6" : "bg-white/50"
-								}`}
-							/>
-						))}
-					</div> */}
 				</div>
 			</motion.div>
 		</div>
