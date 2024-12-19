@@ -9,16 +9,15 @@ export const metadata: Metadata = {
 		"Connect with India's top fashion designers, showcase designs, and collaborate on creative projects.",
 };
 
-export default function RootLayout({
+export default function DesignerLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" suppressHydrationWarning>
-			<body className={inter.className} suppressHydrationWarning>
-				{children}
-			</body>
-		</html>
+		<div className="designers-layout">
+			{/* Designer-specific layout elements can go here */}
+			<main className="min-h-screen">{children}</main>
+		</div>
 	);
 }
