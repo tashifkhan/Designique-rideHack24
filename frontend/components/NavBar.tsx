@@ -95,7 +95,7 @@ const NavBar = () => {
 								</svg>
 							</button>
 							{showServices && (
-								<div className="md:absolute relative left-0 mt-2 w-48 rounded-xl bg-white/[0.005] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-2 border border-white/[0.1]">
+								<div className="md:absolute relative left-0 mt-2 w-48 rounded-xl bg-white/[0.05] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-2 border border-white/[0.1]">
 									{services.map((service) => (
 										<Link
 											key={service}
