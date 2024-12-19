@@ -131,6 +131,10 @@ export default function DesignerCard({ designer }: DesignerCardProps) {
 				designer={designer}
 				open={showChat}
 				onClose={() => setShowChat(false)}
+				onSend={(message) => {
+					// Handle the message sending logic here
+					console.log("Sending message:", message);
+				}}
 			/>
 		</>
 	);
