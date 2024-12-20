@@ -25,7 +25,7 @@ const BackgroundBeamsPage: React.FC = () => {
       const start = window.scrollY;
       const end = start + window.innerHeight; // Scroll to the next screen height
       const duration = 1000; // Duration of scroll in ms (1000ms = 1 second)
-      let startTime: number | null = null;
+      let startTime: number | null = null; 
 
       const scrollStep = (timestamp: number) => {
         if (!startTime) startTime = timestamp;
@@ -75,7 +75,7 @@ const BackgroundBeamsPage: React.FC = () => {
           {cardsData.map((card, index) => (
             <div
               key={index}
-              className="w-[30%] min-w-[250px] max-w-[300px] flex-shrink-0"
+              className="w-[30%] min-w-[250px] max-w-[300px] flex-shrink-0"    
             >
               <DirectionAwareHoverDemo
                 imageUrl={card.imageUrl}
