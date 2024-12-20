@@ -15,9 +15,9 @@ export default function DesignerLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<div className="designers-layout">
+		<div>
 			{/* Designer-specific layout elements can go here */}
-			<main className="min-h-screen">{children}</main>
+			<main className="">{children}</main>
 		</div>
 	);
 }

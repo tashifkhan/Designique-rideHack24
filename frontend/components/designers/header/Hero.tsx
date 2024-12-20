@@ -14,7 +14,7 @@ export default function Hero() {
 			<BackgroundBeamsWithCollision>
 				<h1 className="text-4xl md:text-6xl font-bold text-white mb-6 pt-20">
 					Discover & Connect with
-					<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+					<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">
 						{" "}
 						Fashion Designers
 					</span>
