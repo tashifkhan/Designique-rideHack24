@@ -27,9 +27,9 @@ export async function generateStaticParams() {
 }
 
 function DesignerPage({ params }: Props) {
-	const designer = designers[parseInt(params.id)];
+	const designer = designers[parseInt(params.id) - 1];
 	return (
-		<main className="min-h-screen bg-gray-900">
+		<main className="min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900">
 			{/* cover image */}
 			<div className="relative h-80 w-full">
 				<Image
@@ -78,19 +78,19 @@ function DesignerPage({ params }: Props) {
 
 					{/* Designer stats */}
 					<div className="grid grid-cols-3 gap-8">
-						<div className="text-center p-4 rounded-lg border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
+						<div className="text-center p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
 							<div className="text-2xl font-bold text-white">
 								{designer.following}
 							</div>
 							<div className="text-gray-300">Projects</div>
 						</div>
-						<div className="text-center p-4 rounded-lg border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
+						<div className="text-center p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
 							<div className="text-2xl font-bold text-white">
 								{designer.followers}
 							</div>
 							<div className="text-gray-300">Followers</div>
 						</div>
-						<div className="text-center p-4 rounded-lg border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
+						<div className="text-center p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
 							<div className="text-2xl font-bold text-white">
 								{designer.collections}
 							</div>
@@ -100,7 +100,7 @@ function DesignerPage({ params }: Props) {
 
 					{/* Specialisation details */}
 					<div className="space-y-6">
-						<div className="p-4 rounded-lg border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
+						<div className="p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
 							<h2 className="text-xl font-semibold text-white mb-2">
 								Specialization
 							</h2>
@@ -108,7 +108,7 @@ function DesignerPage({ params }: Props) {
 						</div>
 
 						{/* Bio details */}
-						<div className="p-4 rounded-lg border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
+						<div className="p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
 							<h2 className="text-xl font-semibold text-white mb-2">Bio</h2>
 							<p className="text-gray-300">{designer.bio}</p>
 						</div>
