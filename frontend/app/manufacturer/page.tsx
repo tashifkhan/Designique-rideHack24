@@ -73,17 +73,10 @@ const BackgroundBeamsPage: React.FC = () => {
 					</div>
 
 
-      {/* Fixed search bar */}
-      <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-[600px] px-4">
-        <PlaceholdersAndVanishInputDemo />
-      </div>
       
       {/* Content Section */}
       <div className="flex flex-col flex-grow justify-between">
-        {/* Title: Best-Reviewed Manufacturers */}
-        <div className="text-center font-semibold text-7xl mt-8 text-white font-[Bebas Neue]">
-          Best-Reviewed Manufacturers
-        </div>
+     
        
         {/* Cards Container */}
         <div className="flex flex-wrap justify-center gap-4 flex-grow px-4">
@@ -105,21 +98,7 @@ const BackgroundBeamsPage: React.FC = () => {
      
     </div>
   
-					{/* Cards Container */}
-					<div className="flex flex-wrap justify-center gap-4 flex-grow px-4">
-						{cardsData.map((card, index) => (
-							<div
-								key={index}
-								className="w-[30%] min-w-[250px] max-w-[300px] flex-shrink-0"
-							>
-								<DirectionAwareHoverDemo
-									imageUrl={card.imageUrl}
-									title={card.title}
-									price={card.price}
-								/>
-							</div>
-						))}
-					</div>
+				
 				</div>
 			
 		</main>
