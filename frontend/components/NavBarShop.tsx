@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { ShoppingBag, Search, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -8,6 +9,7 @@ import Link from "next/link";
 
 export default function NavbarShop() {
 	const [isOpen, setIsOpen] = useState(false);
+	const router = useRouter();
 
 	return (
 		<div className="fixed w-full z-50 backdrop-blur-lg bg-black/20 border-b border-white/10">
@@ -76,7 +78,13 @@ export default function NavbarShop() {
 						<Button variant="ghost" size="icon">
 							<Search className="h-5 w-5" />
 						</Button>
-						<Button variant="ghost" size="icon">
+						<Button
+							variant="ghost"
+							size="icon"
+							onClick={() => {
+								router.push("/shop/checkout");
+							}}
+						>
 							<ShoppingBag className="h-5 w-5" />
 							<span className="absolute top-2 right-2 h-4 w-4 text-xs bg-primary rounded-full flex items-center justify-center">
 								0
