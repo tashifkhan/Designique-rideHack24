@@ -2,10 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import NavbarShop from "./NavBarShop";
 
-const NavBar = () => {
+const NavBarMain = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [showServices, setShowServices] = useState(false);
+	const pathname = usePathname();
 
 	const services = ["Web Design", "App Development", "Consulting", "Marketing"];
 
@@ -24,8 +27,15 @@ const NavBar = () => {
 	};
 
 	return (
-		<nav className="fixed w-full z-50 bg-white/[0.001] backdrop-blur-md border-b border-white/[0.1] shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-			<div className="max-w-7xl mx-auto px-4 md:px-6 py-4">
+		<nav
+			className={`
+			fixed w-full z-50 bg-white/[0.001] backdrop-blur-md border-b border-white/[0.1] shadow-[0_4px_30px_rgba(0,0,0,0.1)]`}
+		>
+			<div
+				className={`${
+					pathname == "/shop" ? "hidden " : ""
+				}max-w-7xl mx-auto px-4 md:px-6 py-4`}
+			>
 				<div className="flex items-center justify-between">
 					{/* Logo */}
 					<Link
@@ -136,8 +146,9 @@ const NavBar = () => {
 					</button>
 				</div>
 			</div>
+			{pathname == "/shop" && <NavbarShop />}
 		</nav>
 	);
 };
 
-export default NavBar;
+export default NavBarMain;

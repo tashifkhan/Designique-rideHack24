@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import NavBar from "@/components/NavBar";
+import NavBarMain from "@/components/NavBarMain";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={`antialiased`}>
-				<NavBar />
+				<NavBarMain />
 				{children}
 			</body>
 		</html>
