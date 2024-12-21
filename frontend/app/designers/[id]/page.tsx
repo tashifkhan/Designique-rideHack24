@@ -1,14 +1,19 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { designers } from "@/lib/data/designers";
 import { MapPin } from "lucide-react";
+import { ChatModal } from "@/components/chat/ChatModal";
+import { useState } from "react";
 
 type Props = {
 	params: { id: string };
 };
 
 function DesignerPage({ params }: Props) {
-	const designer = designers[parseInt(params.id) - 1];
+	const id = params.id;
+	const [showChat, setShowChat] = useState(false);
+	const designer = designers[parseInt(id) - 1];
 	return (
 		<main className="min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900">
 			{/* cover image */}
@@ -51,7 +56,13 @@ function DesignerPage({ params }: Props) {
 							<button className="px-6 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition backdrop-blur-sm">
 								Follow
 							</button>
-							<button className="px-6 py-2 border border-white/30 text-white rounded-full hover:bg-white/10 transition backdrop-blur-sm">
+							<button
+								onClick={(e) => {
+									e.stopPropagation();
+									setShowChat(true);
+								}}
+								className="px-6 py-2 border border-white/30 text-white rounded-full hover:bg-white/10 transition backdrop-blur-sm"
+							>
 								Chat
 							</button>
 						</div>
@@ -106,6 +117,15 @@ function DesignerPage({ params }: Props) {
 					</div>
 				</div>
 			</div>
+			<ChatModal
+				designer={designers[parseInt(id) - 1]}
+				open={showChat}
+				onClose={() => setShowChat(false)}
+				onSend={(message) => {
+					// Handle the message sending logic here
+					console.log("Sending message:", message);
+				}}
+			/>
 		</main>
 	);
 }
