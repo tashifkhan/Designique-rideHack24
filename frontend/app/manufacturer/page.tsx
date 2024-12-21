@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect } from "react";
-import BackgroundBeamsWithCollisionDemo from "@/components/ManufacturerComponents/ManufacturerOne";
-import DirectionAwareHoverDemo from "@/components/ManufacturerComponents/CardManufact";
-import PlaceholdersAndVanishInputDemo from "@/components/ManufacturerComponents/Serach"; // Your Search component
+import BackgroundBeamsWithCollisionDemo from "@/components/Manufacturer/ManufacturerOne";
+import DirectionAwareHoverDemo from "@/components/Manufacturer/CardManufact";
+import PlaceholdersAndVanishInputDemo from "@/components/Manufacturer/Serach"; // Your Search component
 
 import img1 from "@/images/dhruv-avatar.jpg";
 import img2 from "@/images/tashif-avatar.jpg";
