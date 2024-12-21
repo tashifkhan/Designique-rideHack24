@@ -9,7 +9,7 @@ const AboutPage = () => {
 			{/* Glassmorphic background elements */}
 			<div className="absolute inset-0">
 				<motion.div
-					className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/30 blur-[100px]"
+					className="absolute top-[13%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/30 blur-[100px]"
 					animate={{ x: [0, 50, -50, 0], y: [0, -50, 50, 0] }}
 					transition={{ duration: 10, repeat: Infinity }}
 				/>

@@ -29,7 +29,7 @@ const NavBarMain = () => {
 	return (
 		<nav
 			className={`
-			fixed w-full z-50 bg-white/[0.001] backdrop-blur-md border-b border-white/[0.1] shadow-[0_4px_30px_rgba(0,0,0,0.1)]`}
+			fixed w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-950/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)]`}
 		>
 			<div
 				className={`${
@@ -63,7 +63,7 @@ const NavBarMain = () => {
 						onClick={handleNavClick}
 						className={`${
 							isOpen ? "flex" : "hidden"
-						} md:flex flex-col md:flex-row absolute md:relative top-full left-0 right-0 md:top-0 w-full md:w-auto bg-white/[0.001] md:bg-transparent backdrop-blur-md md:backdrop-blur-none p-4 md:p-0 space-y-4 md:space-y-0 md:space-x-8 border-b border-white/[0.1] md:border-0 shadow-[0_4px_30px_rgba(0,0,0,0.1)] md:shadow-none`}
+						} md:flex flex-col md:flex-row absolute md:relative top-full left-0 right-0 md:top-0 w-full md:w-auto bg-slate-950/80 md:bg-transparent backdrop-blur-md md:backdrop-blur-none p-4 md:p-0 space-y-4 md:space-y-0 md:space-x-8 border-b border-slate-950/20 md:border-0 shadow-[0_4px_30px_rgba(0,0,0,0.1)] md:shadow-none`}
 					>
 						{/* Regular nav items */}
 						{["Home", "About"].map((item) => (
