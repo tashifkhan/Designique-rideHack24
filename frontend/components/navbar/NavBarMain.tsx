@@ -2,10 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import NavbarShop from "./NavBarShop";
 
-const NavBar = () => {
+const NavBarMain = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [showServices, setShowServices] = useState(false);
+	const pathname = usePathname();
 
 	const services = ["Web Design", "App Development", "Consulting", "Marketing"];
 
@@ -24,8 +27,15 @@ const NavBar = () => {
 	};
 
 	return (
-		<nav className="fixed w-full z-50 bg-white/[0.001] backdrop-blur-md border-b border-white/[0.1] shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-			<div className="max-w-7xl mx-auto px-4 md:px-6 py-4">
+		<nav
+			className={`
+			fixed w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-950/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)]`}
+		>
+			<div
+				className={`${
+					pathname == "/shop" ? "hidden " : ""
+				}max-w-7xl mx-auto px-4 md:px-6 py-4`}
+			>
 				<div className="flex items-center justify-between">
 					{/* Logo */}
 					<Link
@@ -53,7 +63,7 @@ const NavBar = () => {
 						onClick={handleNavClick}
 						className={`${
 							isOpen ? "flex" : "hidden"
-						} md:flex flex-col md:flex-row absolute md:relative top-full left-0 right-0 md:top-0 w-full md:w-auto bg-white/[0.001] md:bg-transparent backdrop-blur-md md:backdrop-blur-none p-4 md:p-0 space-y-4 md:space-y-0 md:space-x-8 border-b border-white/[0.1] md:border-0 shadow-[0_4px_30px_rgba(0,0,0,0.1)] md:shadow-none`}
+						} md:flex flex-col md:flex-row absolute md:relative top-full left-0 right-0 md:top-0 w-full md:w-auto bg-slate-950/80 md:bg-transparent backdrop-blur-md md:backdrop-blur-none p-4 md:p-0 space-y-4 md:space-y-0 md:space-x-8 border-b border-slate-950/20 md:border-0 shadow-[0_4px_30px_rgba(0,0,0,0.1)] md:shadow-none`}
 					>
 						{/* Regular nav items */}
 						{["Home", "About"].map((item) => (
@@ -95,7 +105,14 @@ const NavBar = () => {
 								</svg>
 							</button>
 							{showServices && (
-								<div className="md:absolute relative left-0 mt-2 w-48 rounded-xl bg-white/[0.05] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-2 border border-white/[0.1]">
+								<div
+									className="md:absolute relative left-0 mt-2 w-48 rounded-xl 
+									bg-white/10 backdrop-blur-md
+									shadow-[0_8px_32px_rgba(0,0,0,0.2)] 
+									py-2 border border-white/20 
+									backdrop-saturate-[1.8]
+									backdrop-brightness-125"
+								>
 									{services.map((service) => (
 										<Link
 											key={service}
@@ -129,8 +146,9 @@ const NavBar = () => {
 					</button>
 				</div>
 			</div>
+			{pathname == "/shop" && <NavbarShop />}
 		</nav>
 	);
 };
 
-export default NavBar;
+export default NavBarMain;

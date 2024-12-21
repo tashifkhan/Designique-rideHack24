@@ -7,7 +7,7 @@ const ContactPage = () => {
 		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900 pt-24 relative overflow-hidden">
 			{/* Glassmorphic background elements */}
 			<div className="absolute inset-0">
-				<div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/30 blur-[100px]" />
+				<div className="absolute top-[30%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/30 blur-[100px]" />
 				<div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/30 blur-[100px]" />
 			</div>
 

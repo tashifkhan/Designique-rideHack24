@@ -7,6 +7,7 @@ import { ChatModal } from "@/components/chat/ChatModal";
 import { Users, BookOpen, MapPin } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface DesignerDetailsModalProps {
 	designer: Designer;
@@ -20,6 +21,8 @@ export function DesignerDetailsModal({
 	onClose,
 }: DesignerDetailsModalProps) {
 	const [showChat, setShowChat] = useState(false);
+	const router = useRouter();
+
 	return (
 		<>
 			<Dialog open={open} onOpenChange={onClose}>
@@ -60,7 +63,7 @@ export function DesignerDetailsModal({
 						</div>
 						<Button
 							className="absolute -top-6 right-0 rounded-xl bg-white/20 hover:bg-white/30 backdrop-blur-sm"
-							onClick={() => window.open(`/designers/${designer.id}`, "_blank")}
+							onClick={() => router.push(`/designers/${designer.id}`)}
 						>
 							View Full Profile
 						</Button>

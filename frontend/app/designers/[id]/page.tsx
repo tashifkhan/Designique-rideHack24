@@ -1,35 +1,21 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { designers } from "@/lib/data/designers";
 import { MapPin } from "lucide-react";
+import { ChatModal } from "@/components/chat/ChatModal";
+import { useState } from "react";
 
 type Props = {
 	params: { id: string };
 };
 
-export async function generateStaticParams() {
-	// Replace with your actual designer IDs
-	return [
-		{ id: "1" },
-		{ id: "2" },
-		{ id: "3" },
-		{ id: "4" },
-		{ id: "5" },
-		{ id: "6" },
-		{ id: "7" },
-		{ id: "8" },
-		{ id: "9" },
-		{ id: "10" },
-		{ id: "11" },
-		{ id: "12" },
-		{ id: "13" },
-	];
-}
-
 function DesignerPage({ params }: Props) {
-	const designer = designers[parseInt(params.id)];
+	const id = params.id;
+	const [showChat, setShowChat] = useState(false);
+	const designer = designers[parseInt(id) - 1];
 	return (
-		<main className="min-h-screen bg-gray-900">
+		<main className="min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900">
 			{/* cover image */}
 			<div className="relative h-80 w-full">
 				<Image
@@ -70,7 +56,13 @@ function DesignerPage({ params }: Props) {
 							<button className="px-6 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition backdrop-blur-sm">
 								Follow
 							</button>
-							<button className="px-6 py-2 border border-white/30 text-white rounded-full hover:bg-white/10 transition backdrop-blur-sm">
+							<button
+								onClick={(e) => {
+									e.stopPropagation();
+									setShowChat(true);
+								}}
+								className="px-6 py-2 border border-white/30 text-white rounded-full hover:bg-white/10 transition backdrop-blur-sm"
+							>
 								Chat
 							</button>
 						</div>
@@ -78,19 +70,19 @@ function DesignerPage({ params }: Props) {
 
 					{/* Designer stats */}
 					<div className="grid grid-cols-3 gap-8">
-						<div className="text-center p-4 rounded-lg border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
+						<div className="text-center p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
 							<div className="text-2xl font-bold text-white">
 								{designer.following}
 							</div>
 							<div className="text-gray-300">Projects</div>
 						</div>
-						<div className="text-center p-4 rounded-lg border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
+						<div className="text-center p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
 							<div className="text-2xl font-bold text-white">
 								{designer.followers}
 							</div>
 							<div className="text-gray-300">Followers</div>
 						</div>
-						<div className="text-center p-4 rounded-lg border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
+						<div className="text-center p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
 							<div className="text-2xl font-bold text-white">
 								{designer.collections}
 							</div>
@@ -100,7 +92,7 @@ function DesignerPage({ params }: Props) {
 
 					{/* Specialisation details */}
 					<div className="space-y-6">
-						<div className="p-4 rounded-lg border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
+						<div className="p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
 							<h2 className="text-xl font-semibold text-white mb-2">
 								Specialization
 							</h2>
@@ -108,7 +100,7 @@ function DesignerPage({ params }: Props) {
 						</div>
 
 						{/* Bio details */}
-						<div className="p-4 rounded-lg border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
+						<div className="p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
 							<h2 className="text-xl font-semibold text-white mb-2">Bio</h2>
 							<p className="text-gray-300">{designer.bio}</p>
 						</div>
@@ -125,6 +117,15 @@ function DesignerPage({ params }: Props) {
 					</div>
 				</div>
 			</div>
+			<ChatModal
+				designer={designers[parseInt(id) - 1]}
+				open={showChat}
+				onClose={() => setShowChat(false)}
+				onSend={(message) => {
+					// Handle the message sending logic here
+					console.log("Sending message:", message);
+				}}
+			/>
 		</main>
 	);
 }

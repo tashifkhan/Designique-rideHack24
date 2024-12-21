@@ -17,3 +17,19 @@ export interface Designer {
   followers: number;
   following: number;
 }
+
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  description?: string;
+  sizes?: string[];
+  colors?: string[];
+}
+
+export interface CartItem extends Product {
+  quantity: number;
+  selectedSize?: string;
+  selectedColor?: string;
+}
