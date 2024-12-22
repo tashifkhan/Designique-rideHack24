@@ -139,9 +139,11 @@ const NavBarMain = () => {
 					</div>
 
 					{/* CTA Button */}
-					<button className="hidden md:block px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:opacity-90 transition-opacity duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-						Get Started
-					</button>
+					<Link href="/signup" className="hidden md:block">
+						<button className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:opacity-90 transition-opacity duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+							Get Started
+						</button>
+					</Link>
 				</div>
 			</div>
 			{pathname == "/shop" && <NavbarShop />}
