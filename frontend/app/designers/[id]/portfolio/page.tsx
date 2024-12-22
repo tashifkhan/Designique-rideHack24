@@ -44,8 +44,18 @@ export default function DesignerPortfolioPage() {
 
 	return (
 		<>
-			<div className="min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900 p-4 sm:p-6 md:p-8">
+			<div className="min-h-screen bg-gradient-to-br from-slate-800 via-[#000] to-slate-900 p-4 sm:p-6 md:p-8">
 				{/* Glass Header */}
+				<motion.div
+					className="absolute top-[13%] left-[30%] w-[40%] h-[40%] rounded-full bg-purple-500/20 blur-[100px]"
+					animate={{ x: [0, 50, -50, 0], y: [0, -50, 50, 0] }}
+					transition={{ duration: 10, repeat: Infinity }}
+				/>
+				<motion.div
+					className="absolute bottom-[10%] right-[10%] w-[60%] h-[40%] rounded-full bg-blue-800/20 blur-[100px]"
+					animate={{ x: [0, -50, 50, 0], y: [0, 50, -50, 0] }}
+					transition={{ duration: 10, repeat: Infinity }}
+				/>
 				<div className="backdrop-blur-lg bg-black/40 rounded-2xl p-4 sm:p-6 md:p-8 mb-8 shadow-2xl mt-16 border border-white/10 hover:bg-black/50 transition-all duration-300">
 					<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 						<h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/90">

@@ -19,15 +19,12 @@ const BackgroundBeamsPage: React.FC = () => {
 		{ imageUrl: img4.src, title: "In the desert", price: "$1199 / night" },
 	];
 
-
-  useEffect(() => {
-    const scrollToPosition = () => {
-      const start = window.scrollY;
-      const end = start + window.innerHeight; // Scroll to the next screen height
-      const duration = 1000; // Duration of scroll in ms (1000ms = 1 second)
-      let startTime: number | null = null; 
-
-	
+	useEffect(() => {
+		const scrollToPosition = () => {
+			const start = window.scrollY;
+			const end = start + window.innerHeight; // Scroll to the next screen height
+			const duration = 1000; // Duration of scroll in ms (1000ms = 1 second)
+			let startTime: number | null = null;
 
 			const scrollStep = (timestamp: number) => {
 				if (!startTime) startTime = timestamp;
@@ -72,35 +69,26 @@ const BackgroundBeamsPage: React.FC = () => {
 						Best-Reviewed Manufacturers
 					</div>
 
-
-      
-      {/* Content Section */}
-      <div className="flex flex-col flex-grow justify-between">
-     
-       
-        {/* Cards Container */}
-        <div className="flex flex-wrap justify-center gap-4 flex-grow px-4">
-          {cardsData.map((card, index) => (
-            <div
-              key={index}
-              className="w-[30%] min-w-[250px] max-w-[300px] flex-shrink-0"    
-            >
-              <DirectionAwareHoverDemo
-                imageUrl={card.imageUrl}
-                title={card.title}
-                price={card.price}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-     
-    </div>
-  
-				
+					{/* Content Section */}
+					<div className="flex flex-col flex-grow justify-between">
+						{/* Cards Container */}
+						<div className="flex flex-wrap justify-center gap-4 flex-grow px-4">
+							{cardsData.map((card, index) => (
+								<div
+									key={index}
+									className="w-[30%] min-w-[250px] max-w-[300px] flex-shrink-0"
+								>
+									<DirectionAwareHoverDemo
+										imageUrl={card.imageUrl}
+										title={card.title}
+										price={card.price}
+									/>
+								</div>
+							))}
+						</div>
+					</div>
 				</div>
-			
+			</div>
 		</main>
 	);
 };
