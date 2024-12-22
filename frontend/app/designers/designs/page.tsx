@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import Image from "next/image";
+import SearchBar from "@/components/designers/header/SearchBar";
 
 interface Design {
 	id: number;
@@ -101,16 +102,18 @@ export default function DesignsGallery() {
 	const [activeIndex, setActiveIndex] = useState(0);
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 pt-16">
+		<div className="min-h-screen pt-16">
 			<motion.div
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ duration: 0.5 }}
 			>
 				<div className="container mx-auto px-4 py-16">
-					<h1 className="text-4xl font-bold text-white text-center mb-12">
+					<h1 className="font-bold text-center bg-gradient-to-b from-neutral-600 to-white  bg-clip-text text-transparent text-5xl pb-12">
 						Featured Designs
 					</h1>
+
+					<SearchBar />
 
 					<div className="relative">
 						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -122,7 +125,7 @@ export default function DesignsGallery() {
 									transition={{ delay: index * 0.2 }}
 									className="group relative"
 								>
-									<div className="relative h-[26rem] backdrop-blur-md bg-white/5 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/20 border border-white/10">
+									<div className="relative h-[26rem] backdrop-blur-md bg-white/5 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/05 border border-white/10">
 										<div className="relative h-72 w-full overflow-hidden rounded-xl">
 											<Image
 												src={design.image}
