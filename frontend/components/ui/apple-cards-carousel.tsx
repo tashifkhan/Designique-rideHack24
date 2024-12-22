@@ -239,6 +239,8 @@ export const Card = ({
 			<motion.button
 				layoutId={layout ? `card-${card.title}` : undefined}
 				onClick={handleOpen}
+				whileHover={{ scale: 1.05 }}
+				transition={{ duration: 0.2 }}
 				className="rounded-3xl h-full bg-white/10 backdrop-blur-md border border-white/20 w-56 md:h-[29rem] md:w-96 overflow-hidden flex flex-col items-start justify-start relative z-10 hover:bg-white/20 transition-all"
 			>
 				<div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
