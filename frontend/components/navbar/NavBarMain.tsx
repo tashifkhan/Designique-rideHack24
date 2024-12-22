@@ -10,7 +10,7 @@ const NavBarMain = () => {
 	const [showServices, setShowServices] = useState(false);
 	const pathname = usePathname();
 
-	const services = ["Web Design", "App Development", "Consulting", "Marketing"];
+	const services = ["Designers", "Manufacturer", "Shop"];
 
 	useEffect(() => {
 		const closeMenu = () => {
@@ -116,9 +116,7 @@ const NavBarMain = () => {
 									{services.map((service) => (
 										<Link
 											key={service}
-											href={`/services/${service
-												.toLowerCase()
-												.replace(" ", "-")}`}
+											href={`/${service.toLowerCase().replace(" ", "-")}`}
 											className="block px-4 py-2 text-gray-200 hover:text-purple-400 hover:bg-white/[0.05] transition-colors duration-300"
 										>
 											{service}

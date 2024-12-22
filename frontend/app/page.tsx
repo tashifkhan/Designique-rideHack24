@@ -69,10 +69,10 @@ const Home: React.FC = () => {
 
 	const words = [
 		{ text: "Designers +" },
-		{ text: "Manufacturers + " },
-		{ text: "Shopers" },
+		{ text: "Manufacturers" },
+		{ text: "" },
 		{ text: "=>" },
-		{ text: "\nThe UnderDogs.", className: "text-blue-500" },
+		{ text: "The UnderDogs", className: "text-blue-500" },
 	];
 
 	const testimonials = [
@@ -163,12 +163,12 @@ const Home: React.FC = () => {
 						>
 							{/* Title with Glassmorphic Card */}
 							<motion.div
-								className="relative group rounded-3xl p-8 backdrop-blur-lg bg-white/5 border border-white/10"
+								className="relative group rounded-3xl p-8"
 								whileHover={{ scale: 1.02 }}
 								transition={{ type: "spring", stiffness: 300 }}
 							>
 								<h2 className="text-4xl sm:text-6xl md:text-[8rem] font-sans font-bold tracking-tight">
-									<span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient">
+									<span className="text-center bg-gradient-to-b from-neutral-600 to-white  bg-clip-text text-transparent animate-gradient">
 										DESIGNIQUE
 									</span>
 								</h2>
@@ -207,7 +207,7 @@ const Home: React.FC = () => {
 							initial={{ y: 50, opacity: 0 }}
 							animate={{ y: 0, opacity: 1 }}
 							transition={{ duration: 0.8, delay: 0.4 }}
-							className="mt-16 backdrop-blur-sm bg-white/5 rounded-2xl p-8 border border-white/10"
+							className="mt-16 rounded-2xl p-8"
 						>
 							<TypewriterEffectSmooth words={words} />
 
