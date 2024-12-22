@@ -110,7 +110,7 @@ export default function DesignsGallery() {
 			>
 				<div className="container mx-auto px-4 py-16">
 					<h1 className="font-bold text-center bg-gradient-to-b from-neutral-600 to-white  bg-clip-text text-transparent text-5xl pb-12">
-						Featured Designs
+						Featured Designs & Designers
 					</h1>
 
 					<SearchBar />
