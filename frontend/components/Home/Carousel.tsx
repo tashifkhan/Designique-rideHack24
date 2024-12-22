@@ -16,7 +16,7 @@ export function Carousel() {
 	return (
 		<div className="w-full h-full py-20 flex flex-col">
 			<h2
-				className="text-center pt-8 w-full bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent text-xl md:text-5xl font-bold font-sans tracking-tight hover:scale-105 transition-transform duration-300"
+				className="text-center pt-8 w-full text-xl bg-gradient-to-b from-neutral-600 to-white  bg-clip-text text-transparent md:text-5xl lg:text-7xl font-bold font-sans tracking-tight hover:scale-105 transition-transform duration-300"
 				style={{ height: "40%" }}
 			>
 				MEET OUR 3 PILLARS
