@@ -19,34 +19,34 @@ const BackgroundBeamsPage: React.FC = () => {
 		{ imageUrl: img4.src, title: "In the desert", price: "$1199 / night" },
 	];
 
-	useEffect(() => {
-		const scrollToPosition = () => {
-			const start = window.scrollY;
-			const end = start + window.innerHeight; // Scroll to the next screen height
-			const duration = 1000; // Duration of scroll in ms (1000ms = 1 second)
-			let startTime: number | null = null;
+	// useEffect(() => {
+	// 	const scrollToPosition = () => {
+	// 		const start = window.scrollY;
+	// 		const end = start + window.innerHeight; // Scroll to the next screen height
+	// 		const duration = 1000; // Duration of scroll in ms (1000ms = 1 second)
+	// 		let startTime: number | null = null;
 
-			const scrollStep = (timestamp: number) => {
-				if (!startTime) startTime = timestamp;
-				const progress = timestamp - startTime;
-				const scrollAmount = Math.min(progress / duration, 1) * (end - start);
+	// 		const scrollStep = (timestamp: number) => {
+	// 			if (!startTime) startTime = timestamp;
+	// 			const progress = timestamp - startTime;
+	// 			const scrollAmount = Math.min(progress / duration, 1) * (end - start);
 
-				window.scrollTo(0, start + scrollAmount);
+	// 			window.scrollTo(0, start + scrollAmount);
 
-				if (progress < duration) {
-					requestAnimationFrame(scrollStep); // Keep scrolling until duration is reached
-				}
-			};
+	// 			if (progress < duration) {
+	// 				requestAnimationFrame(scrollStep); // Keep scrolling until duration is reached
+	// 			}
+	// 		};
 
-			requestAnimationFrame(scrollStep); // Start scrolling
-		};
+	// 		requestAnimationFrame(scrollStep); // Start scrolling
+	// 	};
 
-		const timer = setTimeout(() => {
-			scrollToPosition();
-		}, 3000); // Delay the scroll by 3 seconds
+	// 	const timer = setTimeout(() => {
+	// 		scrollToPosition();
+	// 	}, 3000); // Delay the scroll by 3 seconds
 
-		return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
-	}, []);
+	// 	return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
+	// }, []);
 
 	return (
 		<main className="min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900">
