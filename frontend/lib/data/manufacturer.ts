@@ -8,8 +8,8 @@ export const manufacturers = [
 		minOrderQuantity: "100 pieces",
 		productionCapacity: "5000 pieces/month",
 		rating: 4.8,
-		avatar: "/api/placeholder/64/64",
-		coverImage: "/api/placeholder/400/300",
+		avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80",
+		coverImage: "https://images.unsplash.com/photo-1537832816519-689ad163238b?auto=format&fit=crop&q=80",
 	},
 	{
 		id: 2,
@@ -19,8 +19,8 @@ export const manufacturers = [
 		minOrderQuantity: "200 pieces",
 		productionCapacity: "8000 pieces/month",
 		rating: 4.6,
-		avatar: "/api/placeholder/64/64",
-		coverImage: "/api/placeholder/400/300",
+		avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80",
+		coverImage: "https://images.unsplash.com/photo-1537832816519-689ad163238b?auto=format&fit=crop&q=80",
 	},
 	{
 		id: 3,
@@ -30,7 +30,7 @@ export const manufacturers = [
 		minOrderQuantity: "150 pieces",
 		productionCapacity: "3000 pieces/month",
 		rating: 4.9,
-		avatar: "/api/placeholder/64/64",
-		coverImage: "/api/placeholder/400/300",
+		avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80",
+		coverImage: "https://images.unsplash.com/photo-1537832816519-689ad163238b?auto=format&fit=crop&q=80",
 	},
 ];

@@ -20,9 +20,8 @@ const ManufacturerPage: React.FC = () => {
 		<main className="min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900">
 			<div className="xl:w-4/5 mx-auto px-4 sm:px-6 lg:px-8 py-12">
 				<Hero />
-				<SearchBar />
+				{/* <SearchBar /> */}
 				<Features />
-				{/* <FeaturedManufacturers /> */}
 				<TopManufacturers />
 			</div>
 		</main>

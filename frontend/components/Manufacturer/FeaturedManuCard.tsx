@@ -14,7 +14,7 @@ export default function DirectionAwareHoverDemo({
 	price,
 }: DirectionAwareHoverProps) {
 	return (
-		<div className="h-[37rem] relative flex items-center justify-center">
+		<div className="relative flex items-center justify-center">
 			<DirectionAwareHover imageUrl={imageUrl}>
 				<p className="font-bold text-xl">{title}</p>
 				<p className="font-normal text-sm">{price}</p>
