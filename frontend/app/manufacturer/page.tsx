@@ -33,13 +33,13 @@ const ManufacturersPage: React.FC = () => {
 				</div>
 				<Features />
 				<div className="flex flex-col flex-grow justify-between">
-					<h2 className="text-3xl font-bold text-white pb-5">
-						Top Manufacturers
+					<h2 className="text-3xl font-bold text-white pb-9">
+						Featured Manufacturers
 					</h2>
 
 					{/* Content Section */}
 					<div className="flex flex-col flex-grow justify-between">
-						<div className="flex flex-wrap justify-center gap-4 flex-grow px-4">
+						<div className="flex flex-wrap justify-center gap-2 flex-grow px-4">
 							{cardsData.map((card, index) => (
 								<div
 									key={index}

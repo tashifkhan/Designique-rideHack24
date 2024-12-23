@@ -8,7 +8,7 @@ const TopManufacturers = () => {
 			<div className="flex justify-between items-center mb-8">
 				<h2 className="text-3xl font-bold text-white">Top Manufacturers</h2>
 				<Link
-					href="/manufacturers/all"
+					href="/manufacturer/all"
 					className="text-sm text-purple-300 hover:text-purple-400 transition-colors duration-300 flex items-center gap-1"
 				>
 					See more
