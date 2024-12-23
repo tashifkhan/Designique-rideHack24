@@ -1,165 +1,227 @@
 "use client";
-import { motion } from "framer-motion";
 import React, { useState } from "react";
-import Image from "next/image";
-import SearchBar from "@/components/designers/header/SearchBar";
 
-interface Design {
+interface Manufacturer {
 	id: number;
-	image: string;
-	title: string;
-	designer: {
-		name: string;
-		avatar: string;
-	};
+	name: string;
+	location: string;
+	specialty: string;
+	rating: number;
+	capacity: string;
 }
 
-const designs: Design[] = [
+const manufacturers: Manufacturer[] = [
 	{
 		id: 1,
-		image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace",
-		title: "Modern Minimalist",
-		designer: {
-			name: "Jane Doe",
-			avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
-		},
+		name: "TechFab Industries",
+		location: "Berlin, Germany",
+		specialty: "Electronics",
+		rating: 4.8,
+		capacity: "Large Scale",
 	},
 	{
 		id: 2,
-		image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6",
-		title: "Industrial Chic",
-		designer: {
-			name: "John Smith",
-			avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
-		},
+		name: "AutoMakers Co.",
+		location: "Detroit, USA",
+		specialty: "Automobiles",
+		rating: 4.7,
+		capacity: "Medium Scale",
 	},
 	{
 		id: 3,
-		image: "https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e",
-		title: "Scandinavian Style",
-		designer: {
-			name: "Emma Wilson",
-			avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
-		},
+		name: "FashionWorks",
+		location: "Milan, Italy",
+		specialty: "Textiles",
+		rating: 4.9,
+		capacity: "Small Scale",
 	},
 	{
 		id: 4,
-		image: "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a",
-		title: "Contemporary Fusion",
-		designer: {
-			name: "Alex Chen",
-			avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
-		},
+		name: "GreenEnergy Solutions",
+		location: "Oslo, Norway",
+		specialty: "Renewable Energy",
+		rating: 4.6,
+		capacity: "Large Scale",
 	},
 	{
 		id: 5,
-		image: "https://images.unsplash.com/photo-1618219740975-d40978bb7378",
-		title: "Eco-Friendly Living",
-		designer: {
-			name: "Sarah Martinez",
-			avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb",
-		},
+		name: "MedTech Innovations",
+		location: "Zurich, Switzerland",
+		specialty: "Medical Devices",
+		rating: 4.8,
+		capacity: "Medium Scale",
 	},
 	{
 		id: 6,
-		image: "https://images.unsplash.com/photo-1616486171624-cfd858ea0449",
-		title: "Urban Loft",
-		designer: {
-			name: "Michael Park",
-			avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-		},
+		name: "AeroSpace Dynamics",
+		location: "Toulouse, France",
+		specialty: "Aerospace",
+		rating: 4.7,
+		capacity: "Large Scale",
 	},
 	{
 		id: 7,
-		image: "https://images.unsplash.com/photo-1616486171624-cfd858ea0449",
-		title: "Urban Loft",
-		designer: {
-			name: "Michael Park",
-			avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-		},
+		name: "AgriTech Farms",
+		location: "Iowa, USA",
+		specialty: "Agriculture",
+		rating: 4.5,
+		capacity: "Small Scale",
 	},
 	{
 		id: 8,
-		image: "https://images.unsplash.com/photo-1616486171624-cfd858ea0449",
-		title: "Urban Loft",
-		designer: {
-			name: "Michael Park",
-			avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-		},
+		name: "NanoTech Labs",
+		location: "Tokyo, Japan",
+		specialty: "Nanotechnology",
+		rating: 4.9,
+		capacity: "Medium Scale",
 	},
 	{
 		id: 9,
-		image: "https://images.unsplash.com/photo-1616486171624-cfd858ea0449",
-		title: "Urban Loft",
-		designer: {
-			name: "Michael Park",
-			avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-		},
+		name: "BioHealth Corp.",
+		location: "Toronto, Canada",
+		specialty: "Biotechnology",
+		rating: 4.6,
+		capacity: "Large Scale",
 	},
+	{
+		id: 10,
+		name: "SolarTech Industries",
+		location: "Sydney, Australia",
+		specialty: "Solar Energy",
+		rating: 4.8,
+		capacity: "Medium Scale",
+	},
+	// Add more manufacturers...
 ];
 
-export default function DesignsGallery() {
-	const [activeIndex, setActiveIndex] = useState(0);
+export default function ManufacturersTable() {
+	const [searchTerm, setSearchTerm] = useState("");
+	type FilterKeys = "Rating" | "Name" | "Location" | "Specialty";
+	type Filters = {
+		rating: number;
+		location: string;
+		specialty: string;
+		showRating: boolean;
+		showName: boolean;
+		showLocation: boolean;
+		showSpecialty: boolean;
+	};
+	const [filters, setFilters] = useState<Filters>({
+		rating: 0,
+		location: "",
+		specialty: "",
+		showRating: false,
+		showName: false,
+		showLocation: false,
+		showSpecialty: false,
+	});
+
+	const filteredManufacturers = manufacturers.filter(
+		(m) =>
+			m.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+			(filters.rating === 0 || m.rating >= filters.rating) &&
+			(filters.location === "" || m.location.includes(filters.location)) &&
+			(filters.specialty === "" || m.specialty === filters.specialty)
+	);
 
 	return (
-		<div className="min-h-screen pt-16">
-			<motion.div
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1 }}
-				transition={{ duration: 0.5 }}
-			>
-				<div className="container mx-auto px-4 py-16">
-					<h1 className="font-bold text-center bg-gradient-to-b from-neutral-600 to-white  bg-clip-text text-transparent text-5xl pb-12">
-						All Manufacturers
-					</h1>
-
-					<SearchBar />
-
-					<div className="relative">
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-							{designs.map((design, index) => (
-								<motion.div
-									key={design.id}
-									initial={{ opacity: 0, y: 20 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: index * 0.2 }}
-									className="group relative"
-								>
-									<div className="relative h-[26rem] backdrop-blur-md bg-white/5 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/05 border border-white/10">
-										<div className="relative h-72 w-full overflow-hidden rounded-xl">
-											<Image
-												src={design.image}
-												alt={design.title}
-												fill
-												className="object-cover transform transition-transform duration-500 group-hover:scale-105"
-											/>
-											<div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-										</div>
-										<div className="absolute bottom-4 left-6 right-6 space-y-3">
-											<h3 className="text-xl font-semibold text-white">
-												{design.title}
-											</h3>
-											<div className="flex items-center space-x-3">
-												<div className="relative h-8 w-8 rounded-full overflow-hidden ring-2 ring-white/20">
-													<Image
-														src={design.designer.avatar}
-														alt={design.designer.name}
-														fill
-														className="object-cover"
+		<div className="container mx-auto p-6 pt-32">
+			<div className="backdrop-blur-md bg-white/10 rounded-xl p-6 border border-white/20 mb-14">
+				<table className="w-full">
+					<thead className="border-b border-white/10">
+						<tr>
+							{[
+								{ key: "name", label: "Name", type: "text" },
+								{ key: "location", label: "Location", type: "text" },
+								{ key: "specialty", label: "Specialty", type: "text" },
+								{ key: "rating", label: "Rating", type: "number" },
+							].map(
+								(column) =>
+									column.type !== null && (
+										<th key={column.key} className="text-left text-white p-4">
+											<div className="flex items-center justify-between">
+												<button
+													onClick={() =>
+														setFilters((prev) => ({
+															...prev,
+															[`show${
+																column.key.charAt(0).toUpperCase() +
+																column.key.slice(1)
+															}`]:
+																!prev[
+																	`show${
+																		column.key.charAt(0).toUpperCase() +
+																		column.key.slice(1)
+																	}`
+																],
+														}))
+													}
+													className="w-full text-left flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+												>
+													{column.label}
+													<span className="text-xs opacity-50">▼</span>
+												</button>
+											</div>
+											{filters[
+												`show${
+													column.key.charAt(0).toUpperCase() +
+													column.key.slice(1)
+												}`
+											] && (
+												<div className="relative mt-2">
+													<input
+														type={column.type}
+														placeholder={`Filter by ${column.key}`}
+														className="w-full p-2 text-white placeholder-white/30 backdrop-blur-lg bg-white/20 rounded-xl border border-white/10 focus:border-white/30 transition-all outline-none shadow-lg"
+														value={
+															column.key === "name"
+																? searchTerm
+																: filters[column.key]
+														}
+														onChange={(e) =>
+															column.key === "name"
+																? setSearchTerm(e.target.value)
+																: setFilters({
+																		...filters,
+																		[column.key]:
+																			column.type === "number"
+																				? Number(e.target.value)
+																				: e.target.value,
+																  })
+														}
+														style={
+															column.type === "number"
+																? {
+																		WebkitAppearance: "none",
+																		MozAppearance: "textfield",
+																  }
+																: {}
+														}
 													/>
 												</div>
-												<span className="text-white/80 text-sm">
-													{design.designer.name}
-												</span>
-											</div>
-										</div>
-									</div>
-								</motion.div>
-							))}
-						</div>
-					</div>
-				</div>
-			</motion.div>
+											)}
+										</th>
+									)
+							)}
+							<th className="text-left text-white p-4">Capacity</th>
+						</tr>
+					</thead>
+					<tbody>
+						{filteredManufacturers.map((m) => (
+							<tr
+								key={m.id}
+								className="border-b border-white/5 hover:bg-white/5 transition-colors"
+							>
+								<td className="p-4 text-white/50">{m.name}</td>
+								<td className="p-4 text-white/50">{m.location}</td>
+								<td className="p-4 text-white/50">{m.specialty}</td>
+								<td className="p-4 text-white/50">⭐ {m.rating}</td>
+								<td className="p-4 text-white/50">{m.capacity}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 }
