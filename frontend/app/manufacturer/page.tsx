@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import BackgroundBeamsWithCollisionDemo from "@/components/Manufacturer/ManufacturerOne";
-import DirectionAwareHoverDemo from "@/components/Manufacturer/CardManufact";
+import DirectionAwareHoverDemo from "@/components/Manufacturer/FeaturedManuCard";
 import PlaceholdersAndVanishInputDemo from "@/components/Manufacturer/Serach"; // Your Search component
 
 import img1 from "@/images/dhruv-avatar.jpg";
