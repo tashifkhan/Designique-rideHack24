@@ -2,6 +2,7 @@
 import React from "react";
 import { CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import TeamSection from "@/components/TeamSection";
 
 const AboutPage = () => {
 	return (
@@ -148,6 +149,7 @@ const AboutPage = () => {
 						</motion.button>
 					</CardContent>
 				</motion.div>
+				<TeamSection />
 			</div>
 		</div>
 	);

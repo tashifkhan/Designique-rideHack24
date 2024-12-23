@@ -5,6 +5,7 @@ import { designers } from "@/lib/data/designers";
 import { MapPin } from "lucide-react";
 import { ChatModal } from "@/components/chat/ChatModal";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Props = {
 	params: { id: string };
@@ -12,6 +13,7 @@ type Props = {
 
 function DesignerPage({ params }: Props) {
 	const id = params.id;
+	const router = useRouter();
 	const [showChat, setShowChat] = useState(false);
 	const designer = designers[parseInt(id) - 1];
 	return (
@@ -107,7 +109,10 @@ function DesignerPage({ params }: Props) {
 
 						{/* action buttons */}
 						<div className="flex gap-3">
-							<button className="flex-1 px-6 py-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition backdrop-blur-sm">
+							<button
+								onClick={() => router.push(`${params.id}/portfolio`)}
+								className="flex-1 px-6 py-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition backdrop-blur-sm"
+							>
 								View Portfolio
 							</button>
 							<button className="flex-1 px-6 py-3 border border-white/30 text-white rounded-full hover:bg-white/10 transition backdrop-blur-sm">

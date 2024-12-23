@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { BackgroundLinesDemo } from "@/components/Home/Intro";
-import { AppleCardsCarouselDemo } from "@/components/Home/Carousel";
+import { Carousel } from "@/components/Home/Carousel";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa'; // Importing icons for social media
 
 const Home: React.FC = () => {
@@ -77,7 +77,7 @@ const Home: React.FC = () => {
         className="flex items-center justify-center"
         style={{ height: "100vh" }} // Ensure it takes full viewport height
       >
-        {isCarouselVisible && <AppleCardsCarouselDemo />}
+        {isCarouselVisible && <Carousel />}
       </div>
 
       {/* Footer Section */}

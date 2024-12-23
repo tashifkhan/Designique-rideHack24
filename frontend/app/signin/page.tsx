@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
+import Link from "next/link";
 
 export default function SigninForm() {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -114,12 +115,12 @@ export default function SigninForm() {
 
 					<p className="text-center text-sm text-neutral-400">
 						Don't have an account?{" "}
-						<a
+						<Link
 							href="/signup"
 							className="text-blue-400 hover:text-blue-500 transition-colors"
 						>
 							Sign up
-						</a>
+						</Link>
 					</p>
 				</form>
 			</div>

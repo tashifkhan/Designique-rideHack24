@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
+import Link from "next/link";
 
 export default function SignupForm() {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -146,6 +147,15 @@ export default function SignupForm() {
 							</button>
 						))}
 					</div>
+					<p className="text-center text-sm text-neutral-400">
+						Already have an account?{" "}
+						<Link
+							href="/signin"
+							className="text-blue-400 hover:text-blue-500 transition-colors"
+						>
+							Sign in
+						</Link>
+					</p>
 				</form>
 			</div>
 		</div>

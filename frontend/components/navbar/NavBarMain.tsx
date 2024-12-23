@@ -10,7 +10,7 @@ const NavBarMain = () => {
 	const [showServices, setShowServices] = useState(false);
 	const pathname = usePathname();
 
-	const services = ["Web Design", "App Development", "Consulting", "Marketing"];
+	const services = ["Designers", "Manufacturer", "Shop"];
 
 	useEffect(() => {
 		const closeMenu = () => {
@@ -69,7 +69,7 @@ const NavBarMain = () => {
 						{["Home", "About"].map((item) => (
 							<div key={item} className="relative group">
 								<Link
-									href={`/${item.toLowerCase()}`}
+									href={item == "Home" ? "/" : `/${item.toLowerCase()}`}
 									className="block text-gray-200 hover:text-purple-400 transition-colors duration-300"
 								>
 									{item}
@@ -116,9 +116,7 @@ const NavBarMain = () => {
 									{services.map((service) => (
 										<Link
 											key={service}
-											href={`/services/${service
-												.toLowerCase()
-												.replace(" ", "-")}`}
+											href={`/${service.toLowerCase().replace(" ", "-")}`}
 											className="block px-4 py-2 text-gray-200 hover:text-purple-400 hover:bg-white/[0.05] transition-colors duration-300"
 										>
 											{service}
@@ -141,9 +139,11 @@ const NavBarMain = () => {
 					</div>
 
 					{/* CTA Button */}
-					<button className="hidden md:block px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:opacity-90 transition-opacity duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-						Get Started
-					</button>
+					<Link href="/signup" className="hidden md:block">
+						<button className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:opacity-90 transition-opacity duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+							Get Started
+						</button>
+					</Link>
 				</div>
 			</div>
 			{pathname == "/shop" && <NavbarShop />}
