@@ -34,7 +34,7 @@ const Home: React.FC = () => {
     // Trigger smooth scroll after 3 seconds
     const timer = setTimeout(() => {
       scrollToPosition();
-    }, 3000); // Delay the scroll by 3 seconds
+    }, 5000); // Delay the scroll by 3 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
   }, []);
