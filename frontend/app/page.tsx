@@ -6,40 +6,10 @@ import { BackgroundLines } from "@/components/ui/background-lines";
 import { motion } from "framer-motion";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { useRouter } from "next/navigation";
 
 const Home: React.FC = () => {
 	const [isCarouselVisible, setIsCarouselVisible] = useState(false);
-
-	useEffect(() => {
-		// Smooth scroll effect
-		const scrollToPosition = () => {
-			const start = window.scrollY;
-			const end = start + window.innerHeight; // Scroll to the next screen height
-			const duration = 1000; // Duration of scroll in ms (1000ms = 1 second)
-			let startTime: number | null = null;
-
-			const scrollStep = (timestamp: number) => {
-				if (!startTime) startTime = timestamp;
-				const progress = timestamp - startTime;
-				const scrollAmount = Math.min(progress / duration, 1) * (end - start);
-
-				window.scrollTo(0, start + scrollAmount);
-
-				if (progress < duration) {
-					requestAnimationFrame(scrollStep); // Keep scrolling until duration is reached
-				}
-			};
-
-			requestAnimationFrame(scrollStep); // Start scrolling
-		};
-
-		// Trigger smooth scroll after 3 seconds
-		const timer = setTimeout(() => {
-			scrollToPosition();
-		}, 3000); // Delay the scroll by 3 seconds
-
-		return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
-	}, []);
 
 	useEffect(() => {
 		// Intersection Observer to trigger loading of AppleCardsCarouselDemo when in view
@@ -112,6 +82,8 @@ const Home: React.FC = () => {
 			src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		},
 	];
+
+	const router = useRouter();
 
 	return (
 		<div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900">
@@ -217,6 +189,9 @@ const Home: React.FC = () => {
 									whileHover={{ scale: 1.05 }}
 									whileTap={{ scale: 0.95 }}
 									className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+									onClick={() => {
+										router.push("/signup");
+									}}
 								>
 									Join now
 								</motion.button>
@@ -224,6 +199,9 @@ const Home: React.FC = () => {
 									whileHover={{ scale: 1.05 }}
 									whileTap={{ scale: 0.95 }}
 									className="px-8 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+									onClick={() => {
+										router.push("/signup");
+									}}
 								>
 									Signup
 								</motion.button>
