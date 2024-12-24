@@ -1,6 +1,6 @@
 "use client";
 import Hero from "@/components/Manufacturer/Hero";
-import Features from "@/components/designers/header/Features";
+import Features from "@/components/Manufacturer/TopFeatures";
 import TopManufacturers from "@/components/Manufacturer/TopManufacturers";
 
 import React from "react";
