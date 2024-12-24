@@ -15,7 +15,10 @@ export default function ShopLayout({
 	return (
 		<>
 			<ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-				<div className="min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900">
+				<div
+					className="min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900"
+					suppressHydrationWarning
+				>
 					<main>{children}</main>
 					<Toaster />
 				</div>

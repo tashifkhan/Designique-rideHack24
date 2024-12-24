@@ -36,7 +36,7 @@ export default function CheckoutPage() {
 						Your cart is empty
 					</h1>
 					<Button
-						onClick={() => router.push("/")}
+						onClick={() => router.push("/shop/collections")}
 						className="bg-white/20 hover:bg-white/30 transition-all duration-300 rounded-xl"
 					>
 						Continue Shopping

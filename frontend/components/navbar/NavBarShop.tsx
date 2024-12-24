@@ -153,7 +153,7 @@ export default function NavbarShop() {
 							{["Home", "Collections"].map((item) => (
 								<div key={item} className="relative group">
 									<Link
-										href={item == "Home" ? "/" : `/${item.toLowerCase()}`}
+										href={item == "Home" ? "/" : `/shop/${item.toLowerCase()}`}
 										className="block text-gray-200 hover:text-purple-400 transition-colors duration-300"
 									>
 										{item}
