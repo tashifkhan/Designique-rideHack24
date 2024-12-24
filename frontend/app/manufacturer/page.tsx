@@ -15,10 +15,38 @@ import { Search } from "lucide-react";
 
 const ManufacturersPage: React.FC = () => {
 	const cardsData = [
-		{ imageUrl: img1.src, title: "In the mountains", price: "$1299 / night" },
-		{ imageUrl: img2.src, title: "By the beach", price: "$999 / night" },
-		{ imageUrl: img3.src, title: "In the city", price: "$799 / night" },
-		{ imageUrl: img4.src, title: "In the desert", price: "$1199 / night" },
+		{
+			imageUrl: img1.src,
+			title: "Mountain View Manufacturing",
+			location: "Denver, Colorado",
+			rating: 4.8,
+			cost: "$$$$",
+			price: "₹1299 / unit",
+		},
+		{
+			imageUrl: img2.src,
+			title: "Coastal Industries",
+			location: "Miami, Florida",
+			rating: 4.6,
+			cost: "$$$",
+			price: "₹999 / unit",
+		},
+		{
+			imageUrl: img3.src,
+			title: "Urban Manufacturing Co.",
+			location: "Chicago, Illinois",
+			rating: 4.9,
+			cost: "$$$",
+			price: "₹799 / unit",
+		},
+		{
+			imageUrl: img4.src,
+			title: "Desert Tech Solutions",
+			location: "Phoenix, Arizona",
+			rating: 4.7,
+			cost: "$$$$",
+			price: "₹1199 / unit",
+		},
 	];
 
 	return (
@@ -48,7 +76,9 @@ const ManufacturersPage: React.FC = () => {
 									<DirectionAwareHoverDemo
 										imageUrl={card.imageUrl}
 										title={card.title}
-										price={card.price}
+										rating={`${card.rating}⭐️`}
+										location={card.location}
+										price={`${card.price}`}
 									/>
 								</div>
 							))}

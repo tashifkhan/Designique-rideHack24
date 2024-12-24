@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -32,6 +33,7 @@ const featuredProducts = [
 
 export default function Shop() {
 	const { toast } = useToast();
+	const router = useRouter();
 	return (
 		<div className="pt-16">
 			{/* Hero Section */}
@@ -75,6 +77,9 @@ export default function Shop() {
 						<Card
 							key={product.id}
 							className="overflow-hidden rounded-xl backdrop-blur-lg bg-white/5 border-white/10 hover:border-white/20 transition-all"
+							onClick={() =>
+								router.push(`/shop/collections/products/${product.id}`)
+							}
 						>
 							<div className="relative h-96">
 								<Image
@@ -86,7 +91,7 @@ export default function Shop() {
 							</div>
 							<div className="p-6">
 								<h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-								<p className="text-gray-400 mb-4">${product.price}</p>
+								<p className="text-gray-400 mb-4">₹{product.price}</p>
 								<Button
 									className="w-full backdrop-blur-sm bg-white/10 hover:bg-white/20 transition border border-white/20 rounded-xl"
 									onClick={() =>

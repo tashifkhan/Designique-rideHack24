@@ -91,11 +91,11 @@ const Collections = () => {
 							key={category}
 							onClick={() => setSelectedCategory(category)}
 							className={`px-6 py-2 rounded-full backdrop-blur-md transition-all duration-300
-                ${
-									selectedCategory === category
-										? "bg-white/20 text-white shadow-lg"
-										: "bg-white/10 text-gray-300 hover:bg-white/15"
-								}`}
+				${
+					selectedCategory === category
+						? "bg-white/20 text-white shadow-lg"
+						: "bg-white/10 text-gray-300 hover:bg-white/15"
+				}`}
 						>
 							{category.charAt(0).toUpperCase() + category.slice(1)}
 						</Button>
@@ -109,9 +109,10 @@ const Collections = () => {
 					<div
 						key={product.id}
 						className="group relative rounded-xl overflow-hidden backdrop-blur-md bg-white/10 
-                     hover:bg-white/15 transition-all duration-300 shadow-xl"
+					 hover:bg-white/15 transition-all duration-300 shadow-xl"
 					>
 						<div className="relative w-full pt-[133%]">
+							Image
 							<Image
 								src={product.image}
 								alt={product.name}
@@ -129,7 +130,7 @@ const Collections = () => {
 							<h3 className="text-xl font-semibold text-white mb-2">
 								{product.name}
 							</h3>
-							<p className="text-gray-300 mb-4">${product.price.toFixed(2)}</p>
+							<p className="text-gray-300 mb-4">₹{product.price.toFixed(2)}</p>
 							<Button
 								className="w-full py-3 px-6 rounded-xl bg-white/20 text-white 
 						 hover:bg-white/30 transition-all duration-300 backdrop-blur-sm"
