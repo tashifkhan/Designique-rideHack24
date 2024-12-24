@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 interface Product {
 	id: number;
@@ -14,6 +16,8 @@ interface Product {
 
 const Collections = () => {
 	const [selectedCategory, setSelectedCategory] = useState<string>("all");
+	const { toast } = useToast();
+	const router = useRouter();
 
 	const products: Product[] = [
 		{
@@ -116,14 +120,28 @@ const Collections = () => {
 								className="absolute top-0 left-0 h-full w-full group-hover:scale-105 transition-transform duration-300"
 							/>
 						</div>
-						<div className="p-6">
+						<div
+							className="p-6"
+							onClick={() => {
+								router.push(`/shop/collections/products/${product.id}`);
+							}}
+						>
 							<h3 className="text-xl font-semibold text-white mb-2">
 								{product.name}
 							</h3>
 							<p className="text-gray-300 mb-4">${product.price.toFixed(2)}</p>
 							<Button
 								className="w-full py-3 px-6 rounded-xl bg-white/20 text-white 
-                         hover:bg-white/30 transition-all duration-300 backdrop-blur-sm"
+						 hover:bg-white/30 transition-all duration-300 backdrop-blur-sm"
+								onClick={() => {
+									toast({
+										title: "Added to Cart",
+										description: `${product.name} has been added to your cart.`,
+										duration: 3000,
+										className:
+											"bg-white/10 border border-white/20 backdrop-blur-md rounded-xl",
+									});
+								}}
 							>
 								Add to Cart
 							</Button>

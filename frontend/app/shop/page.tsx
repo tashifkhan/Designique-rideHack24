@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -29,7 +30,8 @@ const featuredProducts = [
 	},
 ];
 
-export default function Home() {
+export default function Shop() {
+	const { toast } = useToast();
 	return (
 		<div className="pt-16">
 			{/* Hero Section */}
@@ -85,7 +87,17 @@ export default function Home() {
 							<div className="p-6">
 								<h3 className="text-xl font-semibold mb-2">{product.name}</h3>
 								<p className="text-gray-400 mb-4">${product.price}</p>
-								<Button className="w-full backdrop-blur-sm bg-white/10 hover:bg-white/20 transition border border-white/20 rounded-xl">
+								<Button
+									className="w-full backdrop-blur-sm bg-white/10 hover:bg-white/20 transition border border-white/20 rounded-xl"
+									onClick={() =>
+										toast({
+											title: "Added to cart",
+											description: `${product.name} has been added to your cart`,
+											className:
+												"backdrop-blur-xl bg-white/10 dark:bg-gray-900/10 border border-white/10 rounded-2xl",
+										})
+									}
+								>
 									Add to Cart
 								</Button>
 							</div>
