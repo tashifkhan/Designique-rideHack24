@@ -110,6 +110,9 @@ const Collections = () => {
 						key={product.id}
 						className="group relative rounded-xl overflow-hidden backdrop-blur-md bg-white/10 
 					 hover:bg-white/15 transition-all duration-300 shadow-xl"
+						onClick={() => {
+							router.push(`/shop/collections/products/${product.id}`);
+						}}
 					>
 						<div className="relative w-full pt-[133%]">
 							Image
@@ -121,12 +124,7 @@ const Collections = () => {
 								className="absolute top-0 left-0 h-full w-full group-hover:scale-105 transition-transform duration-300"
 							/>
 						</div>
-						<div
-							className="p-6"
-							onClick={() => {
-								router.push(`/shop/collections/products/${product.id}`);
-							}}
-						>
+						<div className="p-6">
 							<h3 className="text-xl font-semibold text-white mb-2">
 								{product.name}
 							</h3>
