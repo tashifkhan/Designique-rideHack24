@@ -95,7 +95,7 @@ export default function CheckoutPage() {
 								<Input
 									required
 									placeholder="4242 4242 4242 4242"
-									className="bg-white/5 border-white/20 focus:border-white/40"
+									className="bg-white/5 border-white/20 rounded-xl focus:border-white/40"
 								/>
 							</div>
 							<div className="grid grid-cols-2 gap-4">
@@ -106,7 +106,7 @@ export default function CheckoutPage() {
 									<Input
 										required
 										placeholder="MM/YY"
-										className="bg-white/5 border-white/20 focus:border-white/40"
+										className="bg-white/5 border-white/20 rounded-xl focus:border-white/40"
 									/>
 								</div>
 								<div>
@@ -116,7 +116,7 @@ export default function CheckoutPage() {
 									<Input
 										required
 										placeholder="123"
-										className="bg-white/5 border-white/20 focus:border-white/40"
+										className="bg-white/5 border-white/20 rounded-xl focus:border-white/40"
 									/>
 								</div>
 							</div>
@@ -134,7 +134,7 @@ export default function CheckoutPage() {
 								</label>
 								<Input
 									required
-									className="bg-white/5 border-white/20 focus:border-white/40"
+									className="bg-white/5 border-white/20 rounded-xl focus:border-white/40"
 								/>
 							</div>
 							<div>
@@ -143,7 +143,7 @@ export default function CheckoutPage() {
 								</label>
 								<Input
 									required
-									className="bg-white/5 border-white/20 focus:border-white/40"
+									className="bg-white/5 border-white/20 rounded-xl focus:border-white/40"
 								/>
 							</div>
 							<div className="grid grid-cols-2 gap-4">
@@ -153,7 +153,7 @@ export default function CheckoutPage() {
 									</label>
 									<Input
 										required
-										className="bg-white/5 border-white/20 focus:border-white/40"
+										className="bg-white/5 border-white/20 rounded-xl focus:border-white/40"
 									/>
 								</div>
 								<div>
@@ -162,7 +162,7 @@ export default function CheckoutPage() {
 									</label>
 									<Input
 										required
-										className="bg-white/5 border-white/20 focus:border-white/40"
+										className="bg-white/5 border-white/20 rounded-xl focus:border-white/40"
 									/>
 								</div>
 							</div>

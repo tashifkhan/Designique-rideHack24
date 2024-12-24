@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/shop/theme-provider";
 
 export const metadata: Metadata = {
-	title: "Glassmorphic Fashion",
+	title: "Designique Fashion - Shop",
 	description: "Modern fashion e-commerce with unique designs",
 };
 
