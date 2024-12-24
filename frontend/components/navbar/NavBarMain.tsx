@@ -33,7 +33,7 @@ const NavBarMain = () => {
 		>
 			<div
 				className={`${
-					pathname == "/shop" ? "hidden " : ""
+					pathname.startsWith("/shop") ? "hidden " : ""
 				}max-w-7xl mx-auto px-4 md:px-6 py-4`}
 			>
 				<div className="flex items-center justify-between">
@@ -146,7 +146,7 @@ const NavBarMain = () => {
 					</Link>
 				</div>
 			</div>
-			{pathname == "/shop" && <NavbarShop />}
+			{pathname.startsWith("/shop") && <NavbarShop />}
 		</nav>
 	);
 };
