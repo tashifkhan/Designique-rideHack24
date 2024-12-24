@@ -38,8 +38,8 @@ export function Carousel() {
 const ManufacturerContent = () => {
 	return (
 		<div className="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg p-8 md:p-14 rounded-3xl mb-4">
-			<div className="flex justify-center mb-6">
-				<a href="/manufacturer">
+			<p className="text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
+				<span className="font-bold text-neutral-200">
 					Transforming Ideas into Reality
 				</span>{" "}
 				Our expert manufacturers bring designs to life with precision and
