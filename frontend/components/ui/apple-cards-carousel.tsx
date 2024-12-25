@@ -15,6 +15,9 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+import Link from "next/link";
+import { Url } from "next/dist/shared/lib/router/router";
+import { LuExternalLink } from "react-icons/lu";
 
 interface CarouselProps {
 	items: JSX.Element[];
@@ -22,6 +25,7 @@ interface CarouselProps {
 }
 
 type Card = {
+	link: Url;
 	src: string;
 	title: string;
 	category: string;
@@ -164,7 +168,7 @@ export const Card = ({
 }) => {
 	const [open, setOpen] = useState(false);
 	const containerRef = useRef<HTMLDivElement>(null);
-	const { onCardClose, currentIndex } = useContext(CarouselContext);
+	const { onCardClose } = useContext(CarouselContext);
 
 	useEffect(() => {
 		function onKeyDown(event: KeyboardEvent) {
@@ -229,7 +233,13 @@ export const Card = ({
 								layoutId={layout ? `title-${card.title}` : undefined}
 								className="text-2xl md:text-5xl font-semibold mt-4 text-white"
 							>
-								{card.title}
+								{card.title}{" "}
+								<Link
+									href={card.link}
+									className="block pt-3 text-[2rem] cursor-pointer text-purple-300"
+								>
+									<LuExternalLink />
+								</Link>
 							</motion.p>
 							<div className="py-10">{card.content}</div>
 						</motion.div>

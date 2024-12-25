@@ -1,13 +1,6 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import {
-	faBuilding,
-	faPaintBrush,
-	faShoppingCart,
-	faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Carousell, Card } from "@/components/ui/apple-cards-carousel";
 import img1 from "@/images/Manufacture.jpeg";
 import img2 from "@/images/ECOM.png";
@@ -127,9 +120,6 @@ const data = [
 		title: "Manufacturer",
 		src: img1.src,
 		content: <ManufacturerContent />,
-		icon: (
-			<FontAwesomeIcon icon={faBuilding} className="h-6 w-6 text-neutral-200" />
-		),
 		link: "/manufacturer",
 	},
 	{
@@ -137,12 +127,6 @@ const data = [
 		title: "Designer",
 		src: img3.src,
 		content: <DesignerContent />,
-		icon: (
-			<FontAwesomeIcon
-				icon={faPaintBrush}
-				className="h-6 w-6 text-neutral-200"
-			/>
-		),
 		link: "/designers",
 	},
 	{
@@ -150,12 +134,6 @@ const data = [
 		title: "E-commerce Store",
 		src: img2.src,
 		content: <EcommerceContent />,
-		icon: (
-			<FontAwesomeIcon
-				icon={faShoppingCart}
-				className="h-6 w-6 text-neutral-200"
-			/>
-		),
 		link: "/shop",
 	},
 	{
@@ -163,12 +141,6 @@ const data = [
 		title: "About Us",
 		src: img4.src,
 		content: <AboutContent />,
-		icon: (
-			<FontAwesomeIcon
-				icon={faInfoCircle}
-				className="h-6 w-6 text-neutral-200"
-			/>
-		),
 		link: "/about",
 	},
 ];

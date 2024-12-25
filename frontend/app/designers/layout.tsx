@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Designer Portal - Connect with Fashion Designers",
+	title: "Designer Portal",
 	description:
 		"Connect with India's top fashion designers, showcase designs, and collaborate on creative projects.",
 };
