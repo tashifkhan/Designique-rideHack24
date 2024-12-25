@@ -5,6 +5,7 @@ interface IDesigner extends Document {
   email: string;  // Added email field
   password: string;  // Added password field
   photo: string;  // Photo URL or file path
+  coverphoto: string;
   specialization: string;
   bio: string;
   numberOfCollections: number;
@@ -17,6 +18,7 @@ const DesignerSchema = new Schema<IDesigner>({
   email: { type: String, required: true, unique: true },  // Added email with unique constraint
   password: { type: String, required: true },  // Added password field
   photo: { type: String, required: true },  // Store photo URL or file path
+  coverphoto: { type: String, required: true }, // Store kar lo 
   specialization: { type: String, required: true },  // Designer's area of expertise
   bio: { type: String, required: true },  // Designer's bio
   numberOfCollections: { type: Number, required: true },  // Number of collections the designer has

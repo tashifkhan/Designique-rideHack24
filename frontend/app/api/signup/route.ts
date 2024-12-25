@@ -1,4 +1,4 @@
-import connectMongo from '@/lib/connect-mongo';
+// import connectMongo from '@/lib/connect-mongo';
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import Consumer from '@/models/Consumer';
@@ -9,10 +9,10 @@ import Seller from '@/models/Seller'; // Import the Seller model
 export async function POST(req: Request) {
   try {
     // Parse the incoming request body
-    const { userType, name, email, password, photo, location, bio, portfolio, specialization, numberOfCollections, productCapacity, prizeRange, businessType, inventoryCapacity,preferences } = await req.json();
+    const { userType, name, email, coverphoto, password, photo, location, bio, portfolio, specialization, numberOfCollections, productCapacity, prizeRange, businessType, inventoryCapacity,preferences } = await req.json();
 
     // Establish MongoDB connection
-    await connectMongo();
+    // await connectMongo();
 
     // Check if the email already exists
     const existingUser = await Consumer.findOne({ email }) || await Designer.findOne({ email }) || await Manufacturer.findOne({ email }) || await Seller.findOne({ email });
@@ -40,6 +40,7 @@ export async function POST(req: Request) {
         email,
         password: hashedPassword,
         photo,
+        coverphoto,
         location,
         bio,
         portfolio,
