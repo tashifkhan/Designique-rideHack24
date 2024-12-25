@@ -7,10 +7,10 @@ import React from "react";
 import DirectionAwareHoverDemo from "@/components/Manufacturer/FeaturedManuCard";
 import PlaceholdersAndVanishInputDemo from "@/components/Manufacturer/Serach";
 
-import img1 from "@/images/dhruv-avatar.jpg";
-import img2 from "@/images/tashif-avatar.jpg";
-import img3 from "@/images/angel.png";
-import img4 from "@/images/aman-avatar.jpg";
+import img1 from "@/public/dhruv-avatar.jpg";
+import img2 from "@/public/tashif-avatar.jpg";
+import img3 from "@/public/angel-avatar.jpg";
+import img4 from "@/public/aman-avatar.jpg";
 import { Search } from "lucide-react";
 
 const ManufacturersPage: React.FC = () => {
