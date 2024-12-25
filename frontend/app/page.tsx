@@ -9,76 +9,90 @@ import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { useRouter } from "next/navigation";
 
 const Home: React.FC = () => {
-	const [isCarouselVisible, setIsCarouselVisible] = useState(false);
+  const [isCarouselVisible, setIsCarouselVisible] = useState(false);
 
-	useEffect(() => {
-		// Intersection Observer to trigger loading of AppleCardsCarouselDemo when in view
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					setIsCarouselVisible(true);
-					observer.disconnect(); // Stop observing once the element is in view
-				}
-			},
-			{ threshold: 0.04 } // Trigger when 50% of the element is in the viewport
-		);
+  // This useEffect hook will trigger the connection to MongoDB on app startup
+  useEffect(() => {
+    // Trigger MongoDB connection by calling the API route
+    const connectToMongoDB = async () => {
+      try {
+        const response = await fetch("/api/Mongo");
+        const data = await response.json();
+        console.log("Hi"+data.message); // This should print "Connected to MongoDB"
+      } catch (error) {
+        console.error("Failed to connect to MongoDB", error);
+      }
+    };
 
-		const carouselElement = document.getElementById("carousel");
+    connectToMongoDB();
 
-		if (carouselElement) {
-			observer.observe(carouselElement); // Start observing the element
-		}
+    // Intersection Observer to trigger loading of AppleCardsCarouselDemo when in view
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsCarouselVisible(true);
+          observer.disconnect(); // Stop observing once the element is in view
+        }
+      },
+      { threshold: 0.04 } // Trigger when 50% of the element is in the viewport
+    );
 
-		// Cleanup the observer
-		return () => {
-			if (carouselElement) {
-				observer.unobserve(carouselElement);
-			}
-		};
-	}, []);
+    const carouselElement = document.getElementById("carousel");
 
-	const words = [{ text: "Designers +" }, { text: "Manufacturers" }];
-	const words2 = [{ text: "UnderDogs", className: "text-blue-500" }];
+    if (carouselElement) {
+      observer.observe(carouselElement); // Start observing the element
+    }
 
-	const testimonials = [
-		{
-			quote:
-				"The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
-			name: "Sarah Chen",
-			designation: "Product Manager at TechFlow",
-			src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-		},
-		{
-			quote:
-				"Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
-			name: "Michael Rodriguez",
-			designation: "CTO at InnovateSphere",
-			src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-		},
-		{
-			quote:
-				"This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-			name: "Emily Watson",
-			designation: "Operations Director at CloudScale",
-			src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-		},
-		{
-			quote:
-				"Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-			name: "James Kim",
-			designation: "Engineering Lead at DataPro",
-			src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-		},
-		{
-			quote:
-				"The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-			name: "Lisa Thompson",
-			designation: "VP of Technology at FutureNet",
-			src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-		},
-	];
+    // Cleanup the observer
+    return () => {
+      if (carouselElement) {
+        observer.unobserve(carouselElement);
+      }
+    };
+  }, []);
 
-	const router = useRouter();
+  const words = [{ text: "Designers +" }, { text: "Manufacturers" }];
+  const words2 = [{ text: "UnderDogs", className: "text-blue-500" }];
+
+  const testimonials = [
+    {
+      quote:
+        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
+      name: "Sarah Chen",
+      designation: "Product Manager at TechFlow",
+      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
+      name: "Michael Rodriguez",
+      designation: "CTO at InnovateSphere",
+      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
+      name: "Emily Watson",
+      designation: "Operations Director at CloudScale",
+      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
+      name: "James Kim",
+      designation: "Engineering Lead at DataPro",
+      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
+      name: "Lisa Thompson",
+      designation: "VP of Technology at FutureNet",
+      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+  ];
+
+  const router = useRouter();
 
 	return (
 		<div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900">
