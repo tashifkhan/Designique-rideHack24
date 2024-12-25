@@ -96,7 +96,6 @@ const manufacturers: Manufacturer[] = [
 
 export default function ManufacturersTable() {
 	const [searchTerm, setSearchTerm] = useState("");
-	type FilterKeys = "Rating" | "Name" | "Location" | "Specialty";
 	type Filters = {
 		rating: number;
 		location: string;
@@ -106,6 +105,11 @@ export default function ManufacturersTable() {
 		showLocation: boolean;
 		showSpecialty: boolean;
 	};
+
+	const isFilterKey = (key: string): key is keyof Filters => {
+		return key in filters;
+	};
+
 	const [filters, setFilters] = useState<Filters>({
 		rating: 0,
 		location: "",
@@ -135,74 +139,67 @@ export default function ManufacturersTable() {
 								{ key: "location", label: "Location", type: "text" },
 								{ key: "specialty", label: "Specialty", type: "text" },
 								{ key: "rating", label: "Rating", type: "number" },
-							].map(
-								(column) =>
-									column.type !== null && (
-										<th key={column.key} className="text-left text-white p-4">
-											<div className="flex items-center justify-between">
-												<button
-													onClick={() =>
-														setFilters((prev) => ({
-															...prev,
-															[`show${
-																column.key.charAt(0).toUpperCase() +
-																column.key.slice(1)
-															}`]:
-																!prev[
-																	`show${
-																		column.key.charAt(0).toUpperCase() +
-																		column.key.slice(1)
-																	}`
-																],
-														}))
-													}
-													className="w-full text-left flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-												>
-													{column.label}
-													<span className="text-xs opacity-50">▼</span>
-												</button>
-											</div>
-											{filters[
-												`show${
+							].map((column) => (
+								<th key={column.key} className="p-4">
+									<div>
+										<button
+											onClick={() => {
+												const filterKey = `show${
 													column.key.charAt(0).toUpperCase() +
 													column.key.slice(1)
-												}`
-											] && (
-												<div className="relative mt-2">
-													<input
-														type={column.type}
-														placeholder={`Filter by ${column.key}`}
-														className="w-full p-2 text-white placeholder-white/30 backdrop-blur-lg bg-white/20 rounded-xl border border-white/10 focus:border-white/30 transition-all outline-none shadow-lg"
-														value={
-															column.key === "name"
-																? searchTerm
-																: filters[column.key]
-														}
-														onChange={(e) =>
-															column.key === "name"
-																? setSearchTerm(e.target.value)
-																: setFilters({
-																		...filters,
-																		[column.key]:
-																			column.type === "number"
-																				? Number(e.target.value)
-																				: e.target.value,
-																  })
-														}
-														style={
-															column.type === "number"
-																? {
-																		WebkitAppearance: "none",
-																		MozAppearance: "textfield",
-																  }
-																: {}
-														}
-													/>
-												</div>
-											)}
-										</th>
-									)
-							)}
+												}` as keyof Filters;
+												setFilters((prevFilters) => ({
+													...prevFilters,
+													[filterKey]: !prevFilters[filterKey],
+												}));
+											}}
+											className="w-full text-left flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+										>
+											{column.label}
+											<span className="text-xs opacity-50">▼</span>
+										</button>
+									</div>
+									{filters[
+										`show${
+											column.key.charAt(0).toUpperCase() + column.key.slice(1)
+										}` as keyof Filters
+									] && (
+										<div className="relative mt-2">
+											<input
+												type={column.type}
+												placeholder={`Filter by ${column.key}`}
+												className="w-full p-2 text-white placeholder-white/30 backdrop-blur-lg bg-white/20 rounded-xl border border-white/10 focus:border-white/30 transition-all outline-none shadow-lg"
+												value={
+													column.key === "name"
+														? searchTerm
+														: isFilterKey(column.key)
+														? String(filters[column.key])
+														: ""
+												}
+												onChange={(e) =>
+													column.key === "name"
+														? setSearchTerm(e.target.value)
+														: setFilters({
+																...filters,
+																[column.key]:
+																	column.type === "number"
+																		? Number(e.target.value)
+																		: e.target.value,
+														  })
+												}
+												style={
+													column.type === "number"
+														? {
+																WebkitAppearance: "none",
+																MozAppearance: "textfield",
+														  }
+														: {}
+												}
+											/>
+										</div>
+									)}
+								</th>
+							))}
 							<th className="text-left text-white p-4">Capacity</th>
 						</tr>
 					</thead>
