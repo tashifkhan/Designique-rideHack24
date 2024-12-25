@@ -69,7 +69,7 @@ export const BackgroundBeamsWithCollision = ({
 	return (
 		<div
 			ref={parentRef}
-			className={cn("h-[20rem] relative w-full ", className)}
+			className={cn("h-[20rem] relative w-full overflow-hidden", className)}
 		>
 			{beams.map((beam) => (
 				<CollisionMechanism
