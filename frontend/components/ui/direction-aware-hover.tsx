@@ -63,10 +63,11 @@ export const DirectionAwareHover = ({
 
 	return (
 		<motion.div
+			onClick={() => setDirection(direction === "" ? "left" : "")}
 			onMouseEnter={handleMouseEnter}
 			ref={ref}
 			className={cn(
-				"md:h-96 w-60 h-60 md:w-96 bg-transparent rounded-xl overflow-hidden group/card relative",
+				"md:h-96 w-60 h-60 md:w-96 bg-transparent rounded-xl overflow-hidden group/card relative cursor-pointer",
 				className
 			)}
 		>
@@ -74,10 +75,15 @@ export const DirectionAwareHover = ({
 				<motion.div
 					className="relative h-full w-full"
 					initial="initial"
-					whileHover={direction}
+					animate={direction ? direction : "initial"}
 					exit="exit"
 				>
-					<motion.div className="group-hover/card:block hidden absolute inset-0 w-full h-full bg-black/40 z-10 transition duration-500" />
+					<motion.div
+						className={cn(
+							"absolute inset-0 w-full h-full bg-black/40 z-10 transition duration-500",
+							direction ? "block" : "hidden"
+						)}
+					/>
 					<motion.div
 						variants={variants}
 						className="h-full w-full relative bg-black"
