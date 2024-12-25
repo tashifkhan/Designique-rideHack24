@@ -234,9 +234,14 @@ export const Card = ({
 								className="text-2xl md:text-5xl font-semibold mt-4 text-white"
 							>
 								{card.title}{" "}
+							</motion.p>
+							<motion.p
+								layoutId={layout ? `title-${card.title}` : undefined}
+								className="absolute top-10 right-20"
+							>
 								<Link
 									href={card.link}
-									className="block pt-3 text-[2rem] cursor-pointer text-purple-300"
+									className="pt-3 text-[2rem] cursor-pointer text-purple-300"
 								>
 									<LuExternalLink />
 								</Link>
@@ -252,7 +257,7 @@ export const Card = ({
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true }}
-				whileHover={{ scale: 1.05 }}
+				whileHover={{ scale: 1.03 }}
 				transition={{ duration: 0.3 }}
 				className="rounded-3xl h-full bg-white/10 backdrop-blur-md border border-white/20 w-56 md:h-[29rem] md:w-96 overflow-hidden flex flex-col items-start justify-start relative z-10 hover:bg-white/20 transition-all"
 			>
