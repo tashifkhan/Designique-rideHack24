@@ -37,13 +37,8 @@ const Home: React.FC = () => {
 		};
 	}, []);
 
-	const words = [
-		{ text: "Designers +" },
-		{ text: "Manufacturers" },
-		{ text: "" },
-		{ text: "=>" },
-		{ text: "The UnderDogs", className: "text-blue-500" },
-	];
+	const words = [{ text: "Designers +" }, { text: "Manufacturers" }];
+	const words2 = [{ text: "UnderDogs", className: "text-blue-500" }];
 
 	const testimonials = [
 		{
@@ -139,18 +134,18 @@ const Home: React.FC = () => {
 								whileHover={{ scale: 1.02 }}
 								transition={{ type: "spring", stiffness: 300 }}
 							>
-								<h2 className="text-4xl sm:text-6xl md:text-[8rem] font-sans font-bold tracking-tight">
+								<h2 className="hidden sm:inline-block text-6xl sm:text-6xl md:text-[8rem] font-sans font-bold tracking-tight">
 									<span className="text-center bg-gradient-to-b from-neutral-600 to-white  bg-clip-text text-transparent animate-gradient">
 										DESIGNIQUE
 									</span>
 								</h2>
 								<motion.div
-									className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100"
+									className="absolute top-8 right-8 sm:inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100"
 									transition={{ duration: 0.3 }}
 								/>
 							</motion.div>
 
-							<h3 className="text-xl sm:text-2xl md:text-3xl font-light text-neutral-300">
+							<h3 className="text-4xl md:text-3xl font-light text-neutral-300">
 								Where Design Meets Innovation
 							</h3>
 
@@ -158,7 +153,7 @@ const Home: React.FC = () => {
 							<motion.button
 								whileHover={{ scale: 1.05 }}
 								whileTap={{ scale: 0.95 }}
-								className="px-8 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg hover:shadow-xl hover:bg-white/15 transition-all duration-300"
+								className="sm:inline-block hidden px-8 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg hover:shadow-xl hover:bg-white/15 transition-all duration-300"
 							>
 								Explore More
 								<motion.div
@@ -181,14 +176,17 @@ const Home: React.FC = () => {
 							transition={{ duration: 0.8, delay: 0.4 }}
 							className="mt-16 rounded-2xl p-8"
 						>
-							<TypewriterEffectSmooth words={words} />
+							<TypewriterEffectSmooth words={words} className="" />
+							<div className="flex justify-center">
+								<TypewriterEffectSmooth words={words2} />
+							</div>
 
 							{/* Action Buttons */}
-							<div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
+							<div className="flex flex-col items-center sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
 								<motion.button
 									whileHover={{ scale: 1.05 }}
 									whileTap={{ scale: 0.95 }}
-									className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+									className="w-[120px] sm:w-[150px] px-4 sm:px-8 py-2 sm:py-3 text-sm sm:text-base rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all duration-300"
 									onClick={() => {
 										router.push("/signup");
 									}}
@@ -198,7 +196,7 @@ const Home: React.FC = () => {
 								<motion.button
 									whileHover={{ scale: 1.05 }}
 									whileTap={{ scale: 0.95 }}
-									className="px-8 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+									className="w-[120px] sm:w-[150px] px-4 sm:px-8 py-2 sm:py-3 text-sm sm:text-base rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg hover:shadow-xl transition-all duration-300"
 									onClick={() => {
 										router.push("/signup");
 									}}
