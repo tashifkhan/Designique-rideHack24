@@ -7,6 +7,7 @@ import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default function SignupForm() {
+	const [selectedRole, setSelectedRole] = React.useState<string>("");
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		console.log("Form submitted");
@@ -37,7 +38,7 @@ export default function SignupForm() {
 								id="firstname"
 								placeholder="Tashif Ahmad"
 								type="text"
-								className="bg-zinc-800/30 border-zinc-700/50 text-neutral-200 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all"
+								className="w-full bg-zinc-800/30 backdrop-blur-md border border-zinc-700/50 text-neutral-300 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all h-10 px-3 appearance-none cursor-pointer hover:bg-zinc-800/50 shadow-[0_2px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_2px_15px_rgba(59,130,246,0.1)]"
 							/>
 						</LabelInputContainer>
 						<LabelInputContainer>
@@ -51,7 +52,7 @@ export default function SignupForm() {
 								id="lastname"
 								placeholder="Khan"
 								type="text"
-								className="bg-zinc-800/30 border-zinc-700/50 text-neutral-200 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all"
+								className="w-full bg-zinc-800/30 backdrop-blur-md border border-zinc-700/50 text-neutral-300 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all h-10 px-3 appearance-none cursor-pointer hover:bg-zinc-800/50 shadow-[0_2px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_2px_15px_rgba(59,130,246,0.1)]"
 							/>
 						</LabelInputContainer>
 					</div>
@@ -65,22 +66,66 @@ export default function SignupForm() {
 						</Label>
 						<select
 							id="category"
-							className="bg-zinc-800/30 border-zinc-700/50 text-neutral-200 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all h-10 px-3"
+							className="w-full bg-zinc-800/30 backdrop-blur-md border border-zinc-700/50 text-neutral-400 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all h-10 px-3 appearance-none cursor-pointer hover:bg-zinc-800/50 shadow-[0_2px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_2px_15px_rgba(59,130,246,0.1)]"
+							style={{
+								backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+								backgroundRepeat: "no-repeat",
+								backgroundPosition: "right 0.75rem center",
+								backgroundSize: "1.5em 1.5em",
+							}}
+							onChange={(e) => setSelectedRole(e.target.value)}
 						>
-							<option value="" className="text-neutral-500 ">
-								Select your role
-							</option>
-							<option value="consumer" className="bg-zinc-800">
-								Consumer
-							</option>
-							<option value="designer" className="bg-zinc-800">
-								Designer
-							</option>
-							<option value="manufacturer" className="bg-zinc-800">
-								Manufacturer
-							</option>
+							{[
+								"Select your role",
+								"Consumer/Visiter",
+								"Designer",
+								"Manufacturer",
+								"Seller (Specifically for Designique Shop)",
+							].map((option, index) => (
+								<option
+									key={index}
+									value={index === 0 ? "" : option}
+									className="bg-zinc-800 text-neutral-200"
+								>
+									{option}
+								</option>
+							))}
 						</select>
 					</LabelInputContainer>
+
+					{selectedRole && !["Consumer/Visiter", ""].includes(selectedRole) && (
+						<>
+							<LabelInputContainer>
+								<Label
+									htmlFor="experience"
+									className="text-neutral-200 text-sm font-medium"
+								>
+									Years of Experience
+								</Label>
+								<Input
+									id="experience"
+									type="number"
+									min="0"
+									placeholder="Enter years of experience"
+									className="w-full bg-zinc-800/30 backdrop-blur-md border border-zinc-700/50 text-neutral-300 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all h-10 px-3 appearance-none cursor-pointer hover:bg-zinc-800/50"
+								/>
+							</LabelInputContainer>
+							<LabelInputContainer>
+								<Label
+									htmlFor="portfolio"
+									className="text-neutral-200 text-sm font-medium"
+								>
+									Portfolio URL
+								</Label>
+								<Input
+									id="portfolio"
+									type="url"
+									placeholder="https://your-portfolio.com"
+									className="w-full bg-zinc-800/30 backdrop-blur-md border border-zinc-700/50 text-neutral-300 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all h-10 px-3 appearance-none cursor-pointer hover:bg-zinc-800/50"
+								/>
+							</LabelInputContainer>
+						</>
+					)}
 
 					<LabelInputContainer>
 						<Label
@@ -93,7 +138,7 @@ export default function SignupForm() {
 							id="email"
 							placeholder="developer420@tashif.codes"
 							type="email"
-							className="bg-zinc-800/30 border-zinc-700/50 text-neutral-200 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all"
+							className="w-full bg-zinc-800/30 backdrop-blur-md border border-zinc-700/50 text-neutral-300 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all h-10 px-3 appearance-none cursor-pointer hover:bg-zinc-800/50 shadow-[0_2px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_2px_15px_rgba(59,130,246,0.1)]"
 						/>
 					</LabelInputContainer>
 
@@ -108,7 +153,7 @@ export default function SignupForm() {
 							id="password"
 							placeholder="••••••••"
 							type="password"
-							className="bg-zinc-800/30 border-zinc-700/50 text-neutral-200 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all"
+							className="w-full bg-zinc-800/30 backdrop-blur-md border border-zinc-700/50 text-neutral-300 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all h-10 px-3 appearance-none cursor-pointer hover:bg-zinc-800/50 shadow-[0_2px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_2px_15px_rgba(59,130,246,0.1)]"
 						/>
 					</LabelInputContainer>
 
