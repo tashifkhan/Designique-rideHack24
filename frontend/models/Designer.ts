@@ -19,7 +19,7 @@ const DesignerSchema = new Schema<IDesigner>({
   password: { type: String, required: true },  // Added password field
   photo: { type: String, required: true },  // Store photo URL or file path
   coverphoto: { type: String, required: true }, // Store kar lo 
-  specialization: { type: String, required: true },  // Designer's area of expertise
+  specialization: { type: String, required: false },  // Designer's area of expertise
   bio: { type: String, required: true },  // Designer's bio
   numberOfCollections: { type: Number, required: true },  // Number of collections the designer has
   portfolio: { type: [String], required: true },  // Array of portfolio items (URLs or file paths)

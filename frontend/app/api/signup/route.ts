@@ -5,17 +5,36 @@ import Consumer from '@/models/Consumer';
 import Designer from '@/models/Designer';
 import Manufacturer from '@/models/Manufacturer';
 import Seller from '@/models/Seller'; // Import the Seller model
-
 export async function POST(req: Request) {
   try {
     // Parse the incoming request body
-    const { userType, name, email, coverphoto, password, photo, location, bio, portfolio, specialization, numberOfCollections, productCapacity, prizeRange, businessType, inventoryCapacity,preferences } = await req.json();
+    const { 
+      userType, 
+      name, 
+      email, 
+      coverphoto, 
+      password, 
+      photo, 
+      location, 
+      bio, 
+      portfolio, 
+      specialization, 
+      numberOfCollections, 
+      preferences ,
+      productPrices,
+       specialty,
+       productCapacity
+    } = await req.json();
 
     // Establish MongoDB connection
     // await connectMongo();
 
     // Check if the email already exists
-    const existingUser = await Consumer.findOne({ email }) || await Designer.findOne({ email }) || await Manufacturer.findOne({ email }) || await Seller.findOne({ email });
+    const existingUser = await Consumer.findOne({ email }) || 
+                         await Designer.findOne({ email }) || 
+                         await Manufacturer.findOne({ email }) || 
+                         await Seller.findOne({ email });
+
     if (existingUser) {
       return NextResponse.json({ message: 'Email already in use' }, { status: 400 });
     }
@@ -32,19 +51,20 @@ export async function POST(req: Request) {
         email,
         password: hashedPassword,
         preferences,
-      
       });
     } else if (userType === 'designer') {
       newUser = new Designer({
         name,
         email,
         password: hashedPassword,
-        photo,
-        coverphoto,
-        location,
-        bio,
-        portfolio,
-        numberOfCollections,
+        photo,             // Designer's photo
+        coverphoto,        // Designer's cover photo
+        location,          // Location
+        bio,               // Designer's bio
+        portfolio,         // Array of portfolio items (URLs or file paths)
+        numberOfCollections, // Number of collections
+        specialization,    // Designer's area of expertise (optional)
+        orders: []         // Assuming you don't have orders for new designers yet, so we initialize it as an empty array
       });
     } else if (userType === 'manufacturer') {
       newUser = new Manufacturer({
@@ -54,10 +74,11 @@ export async function POST(req: Request) {
         photo,
         location,
         productCapacity,
-        prizeRange,
-        specialty: specialization,
+        productPrices,  // Product prices passed dynamically from the request body
+        specialty,      // Specialization field passed from the request body
       });
-    } else if (userType === 'seller') {
+    }
+     else if (userType === 'seller') {
       newUser = new Seller({
         name,
         email,
