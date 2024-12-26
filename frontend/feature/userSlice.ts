@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Define the user state interface with all the new fields
 interface UserState {
   user: {
     id: string;
@@ -28,7 +27,6 @@ const initialState: UserState = {
   isLoggedIn: false,
 };
 
-// Create a slice to manage user data
 const userSlice = createSlice({
   name: 'user',
   initialState,
