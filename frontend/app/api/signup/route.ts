@@ -1,10 +1,10 @@
 // import connectMongo from '@/lib/connect-mongo';
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import Consumer from '@/models/Consumer';
-import Designer from '@/models/Designer';
-import Manufacturer from '@/models/Manufacturer';
-import Seller from '@/models/Seller'; // Import the Seller model
+import Consumer from '@/lib/db/models/Consumer';
+import Designer from '@/lib/db/models/Designer';
+import Manufacturer from '@/lib/db/models/Manufacturer';
+import Seller from '@/lib/db/models/Seller'; // Import the Seller model
 export async function POST(req: Request) {
   try {
     // Parse the incoming request body

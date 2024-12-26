@@ -1,4 +1,3 @@
-// models/Consumer.ts
 import mongoose, { Schema, Document } from 'mongoose';
 
 interface IConsumer extends Document {

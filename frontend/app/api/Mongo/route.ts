@@ -1,4 +1,4 @@
-import connectMongo from '@/lib/connect-mongo';
+import connectMongo from '@/lib/db/connectMongo';
 
 export async function GET(req: Request) {
   try {
