@@ -20,10 +20,12 @@ export async function POST(req: Request) {
       portfolio, 
       specialization, 
       numberOfCollections, 
-      preferences ,
+      preferences,
       productPrices,
       specialty,
-      productCapacity
+      productCapacity,
+      businessType,
+      inventoryCapacity
     } = await req.json();
 
     // Establish MongoDB connection
