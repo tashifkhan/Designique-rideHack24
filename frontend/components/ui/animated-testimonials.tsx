@@ -43,10 +43,10 @@ export const AnimatedTestimonials = ({
 		return Math.floor(Math.random() * 21) - 10;
 	};
 	return (
-		<div className="max-w-sm md:max-w-4xl mx-auto antialiased font-sans px-4 md:px-8 lg:px-12 pb-16">
-			<div className="relative grid grid-cols-1 md:grid-cols-2  gap-20">
+		<div className="max-w-sm md:max-w-4xl mx-auto antialiased font-sans px-4 md:px-8 lg:px-12 pb-8 md:pb-16">
+			<div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-20">
 				<div>
-					<div className="relative h-80 w-full">
+					<div className="relative h-64 sm:h-72 md:h-80 w-full">
 						<AnimatePresence>
 							{testimonials.map((testimonial, index) => (
 								<motion.div
@@ -65,7 +65,7 @@ export const AnimatedTestimonials = ({
 										zIndex: isActive(index)
 											? 999
 											: testimonials.length + 2 - index,
-										y: isActive(index) ? [0, -80, 0] : 0,
+										y: isActive(index) ? [0, -60, 0] : 0,
 									}}
 									exit={{
 										opacity: 0,
@@ -85,14 +85,14 @@ export const AnimatedTestimonials = ({
 										width={500}
 										height={500}
 										draggable={false}
-										className="h-full w-full rounded-3xl object-cover object-center"
+										className="h-full w-full rounded-2xl md:rounded-3xl object-cover object-center shadow-lg"
 									/>
 								</motion.div>
 							))}
 						</AnimatePresence>
 					</div>
 				</div>
-				<div className="flex justify-between flex-col py-4">
+				<div className="flex justify-between flex-col py-2 md:py-4">
 					<motion.div
 						key={active}
 						initial={{
@@ -112,13 +112,13 @@ export const AnimatedTestimonials = ({
 							ease: "easeInOut",
 						}}
 					>
-						<h3 className="text-2xl font-bold text-white ">
+						<h3 className="text-xl md:text-2xl font-bold text-white ">
 							{testimonials[active].name}
 						</h3>
-						<p className="text-sm text-gray-500">
+						<p className="text-xs md:text-sm text-gray-500">
 							{testimonials[active].designation}
 						</p>
-						<motion.p className="text-lg text-gray-500 mt-8 ">
+						<motion.p className="text-base md:text-lg text-gray-500 mt-4 md:mt-8 ">
 							{testimonials[active].quote.split(" ").map((word, index) => (
 								<motion.span
 									key={index}
@@ -144,16 +144,16 @@ export const AnimatedTestimonials = ({
 							))}
 						</motion.p>
 					</motion.div>
-					<div className="flex gap-4 pt-12 md:pt-0">
+					<div className="flex gap-4 pt-6 md:pt-12">
 						<button
 							onClick={handlePrev}
-							className="h-7 w-7 rounded-full bg-opacity-10 bg-white backdrop-blur-md backdrop-filter border border-white/20 flex items-center justify-center group/button hover:bg-opacity-20 transition-all duration-300"
+							className="h-8 w-8 md:h-7 md:w-7 rounded-full bg-opacity-10 bg-white backdrop-blur-md backdrop-filter border border-white/20 flex items-center justify-center group/button hover:bg-opacity-20 transition-all duration-300 active:scale-95 touch-manipulation"
 						>
 							<IconArrowLeft className="h-5 w-5 text-white/70 group-hover/button:rotate-12 transition-transform duration-300" />
 						</button>
 						<button
 							onClick={handleNext}
-							className="h-7 w-7 rounded-full bg-opacity-10 bg-white backdrop-blur-md backdrop-filter border border-white/20 flex items-center justify-center group/button hover:bg-opacity-20 transition-all duration-300"
+							className="h-8 w-8 md:h-7 md:w-7 rounded-full bg-opacity-10 bg-white backdrop-blur-md backdrop-filter border border-white/20 flex items-center justify-center group/button hover:bg-opacity-20 transition-all duration-300 active:scale-95 touch-manipulation"
 						>
 							<IconArrowRight className="h-5 w-5 text-white/70 group-hover/button:-rotate-12 transition-transform duration-300" />
 						</button>

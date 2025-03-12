@@ -36,8 +36,8 @@ const ManufacturerContent = () => {
 					Transforming Ideas into Reality
 				</span>{" "}
 				Our expert manufacturers bring designs to life with precision and
-				quality. We partner with trusted facilities to ensure each product meets
-				the highest standards of craftsmanship and durability.
+				quality. We partner with trusted facilities to ensure each product
+				meetshe higmeehs test standards of craftsmanship and durability.
 			</p>
 			<Image
 				src={img5.src}
@@ -59,7 +59,7 @@ const DesignerContent = () => {
 				</span>{" "}
 				Our talented designers blend creativity with functionality to create
 				unique and appealing products. Every design is crafted with attention to
-				detail and user experience in mind.
+				detail and user eriencto e in mind.
 			</p>
 			<Image
 				src={img5.src}
@@ -80,8 +80,8 @@ const EcommerceContent = () => {
 					Seamless Shopping Experience
 				</span>{" "}
 				Our e-commerce platform provides a user-friendly interface for browsing
-				and purchasing products. We ensure secure transactions and efficient
-				delivery to enhance customer satisfaction.
+				and purchasing products. We ensure s transactions and efficient delivery
+				to enhance custome satisfac{" "}
 			</p>
 			<Image
 				src={img5.src}
