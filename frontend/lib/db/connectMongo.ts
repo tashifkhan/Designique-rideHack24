@@ -5,7 +5,6 @@ const connectMongo = async () => {
         console.log("Already connected to MongoDB");
         return;
     }
-
     try {
         await mongoose.connect(process.env.MONGODB_URI as string, {});  
         console.log("MongoDB connection successfull");
