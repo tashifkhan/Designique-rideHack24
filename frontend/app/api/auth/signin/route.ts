@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import connectMongo from "@/lib/db/connectMongo";
 import { User } from "@/models/Users";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import * as jose from "jose";
 
 export async function POST(req: Request) {
   try {
@@ -26,10 +26,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
     }
 
-    // if (!user.isVerified) {
-    //   return NextResponse.json({ message: "Email not verified. Please check your inbox." }, { status: 403 });
-    // }
-
     const isPasswordMatch = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatch) {
@@ -37,40 +33,75 @@ export async function POST(req: Request) {
     }
 
     const accessTokenPayload = {
-      id: user._id,
+      id: user._id.toString(),
       email: user.email,
-      roles: user.roles,
-      isVerified: user.isVerified
+      roles: Array.isArray(user.roles) ? user.roles.map((r: { toString: () => any; }) => r.toString()) : [],
+      isVerified: !!user.isVerified
     };
 
     const refreshTokenPayload = {
-      id: user._id
+      id: user._id.toString()
     };
 
     const accessSecret = process.env.JWT_ACCESS_SECRET;
     const refreshSecret = process.env.JWT_REFRESH_SECRET;
-    const accessTokenExpiry = process.env.ACCESS_TOKEN_EXPIRY ?? "15m"; 
+    const accessTokenExpiry = process.env.ACCESS_TOKEN_EXPIRY ?? "15m";
     const refreshTokenExpiry = process.env.REFRESH_TOKEN_EXPIRY ?? "7d";
-    const refreshTokenMaxAge = 60 * 60 * 24 * 7; 
+    const refreshTokenMaxAge = 60 * 60 * 24 * 7;
 
     if (!accessSecret || !refreshSecret) {
       console.error("JWT access or refresh secret environment variable is not set.");
       return NextResponse.json({ message: "Internal server error: JWT configuration missing" }, { status: 500 });
     }
 
-    const accessToken = jwt.sign(accessTokenPayload, accessSecret, {
-      expiresIn: accessTokenExpiry
-    });
+    const getExpiryInSeconds = (expiryString: string) => {
+      const unit = expiryString.slice(-1);
+      const value = parseInt(expiryString.slice(0, -1));
+      
+      switch(unit) {
+        case "m": return value * 60;
+        case "h": return value * 60 * 60;
+        case "d": return value * 60 * 60 * 24;
+        default: return 900;
+      }
+    };
 
-    const refreshToken = jwt.sign(refreshTokenPayload, refreshSecret, {
-      expiresIn: refreshTokenExpiry
-    });
+    const accessExpiryInSeconds = getExpiryInSeconds(accessTokenExpiry);
+    const refreshExpiryInSeconds = getExpiryInSeconds(refreshTokenExpiry);
 
-    const response = NextResponse.json({
+    const accessToken = await new jose.SignJWT(accessTokenPayload)
+      .setProtectedHeader({ alg: "HS256" })
+      .setIssuedAt()
+      .setExpirationTime(Math.floor(Date.now() / 1000) + accessExpiryInSeconds)
+      .sign(new TextEncoder().encode(accessSecret));
+
+    const refreshToken = await new jose.SignJWT(refreshTokenPayload)
+      .setProtectedHeader({ alg: "HS256" })
+      .setIssuedAt()
+      .setExpirationTime(Math.floor(Date.now() / 1000) + refreshExpiryInSeconds)
+      .sign(new TextEncoder().encode(refreshSecret));
+
+    interface SigninResponseUser {
+      id: string
+      email: string
+      roles: string[]
+    }
+
+    interface SigninResponseBody {
+      message: string
+      accessToken: string
+      user: SigninResponseUser
+    }
+
+    const response: NextResponse<SigninResponseBody> = NextResponse.json({
       message: "Signin successful",
       accessToken,
-      user: { id: user._id, email: user.email, roles: user.roles }
-    }, { status: 200 });
+      user: { 
+        id: user._id.toString(), 
+        email: user.email, 
+        roles: Array.isArray(user.roles) ? user.roles.map((r: { toString: () => string }) => r.toString()) : [] 
+      }
+    }, { status: 200 })
 
     response.cookies.set("refreshToken", refreshToken, {
       httpOnly: true,
@@ -86,7 +117,7 @@ export async function POST(req: Request) {
       sameSite: "strict",
       maxAge: refreshTokenMaxAge,
       path: "/"
-    })
+    });
 
     return response;
   } catch (error) {

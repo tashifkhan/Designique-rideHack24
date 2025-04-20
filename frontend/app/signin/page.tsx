@@ -1,15 +1,71 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 export default function SigninForm() {
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const router = useRouter();
+	const [formData, setFormData] = useState({
+		email: "",
+		password: "",
+		rememberMe: false,
+	});
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [error, setError] = useState<string | null>(null);
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value, type, checked } = e.target;
+		setFormData((prev) => ({
+			...prev,
+			[name]: type === "checkbox" ? checked : value,
+		}));
+	};
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log("Form submitted");
+		setError(null);
+		setIsSubmitting(true);
+
+		try {
+			// Validate form data
+			if (!formData.email || !formData.password) {
+				throw new Error("Email and password are required");
+			}
+
+			// Call the API
+			const response = await fetch("/api/auth/signin", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email: formData.email,
+					password: formData.password,
+				}),
+			});
+
+			const data = await response.json();
+
+			if (!response.ok) {
+				throw new Error(data.message || "Failed to sign in");
+			}
+
+			// Handle successful signin
+			router.push("/dashboard"); // Redirect to dashboard or home
+			router.refresh(); // Refresh to update auth state in UI
+		} catch (err) {
+			console.error("Signin error:", err);
+			setError(
+				err instanceof Error ? err.message : "An unexpected error occurred"
+			);
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	return (
@@ -24,6 +80,12 @@ export default function SigninForm() {
 					</p>
 				</div>
 
+				{error && (
+					<div className="mb-6 p-4 rounded-xl bg-red-900/20 border border-red-500/30 text-red-300">
+						{error}
+					</div>
+				)}
+
 				<form className="space-y-6" onSubmit={handleSubmit}>
 					<LabelInputContainer>
 						<Label
@@ -34,9 +96,13 @@ export default function SigninForm() {
 						</Label>
 						<Input
 							id="email"
+							name="email"
 							placeholder="developer420@tashif.codes"
 							type="email"
+							value={formData.email}
+							onChange={handleChange}
 							className="bg-zinc-800/30 border-zinc-700/50 text-neutral-200 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all"
+							disabled={isSubmitting}
 						/>
 					</LabelInputContainer>
 
@@ -49,9 +115,13 @@ export default function SigninForm() {
 						</Label>
 						<Input
 							id="password"
+							name="password"
 							placeholder="••••••••"
 							type="password"
+							value={formData.password}
+							onChange={handleChange}
 							className="bg-zinc-800/30 border-zinc-700/50 text-neutral-200 placeholder:text-neutral-500 rounded-xl focus:border-blue-500 focus:ring-blue-500/20 transition-all"
+							disabled={isSubmitting}
 						/>
 					</LabelInputContainer>
 
@@ -59,29 +129,41 @@ export default function SigninForm() {
 						<div className="flex items-center">
 							<input
 								type="checkbox"
-								id="remember"
+								id="rememberMe"
+								name="rememberMe"
+								checked={formData.rememberMe}
+								onChange={handleChange}
 								className="h-4 w-4 rounded border-zinc-700/50 bg-zinc-800/30 text-blue-500 focus:ring-blue-500/20"
+								disabled={isSubmitting}
 							/>
 							<label
-								htmlFor="remember"
+								htmlFor="rememberMe"
 								className="ml-2 text-sm text-neutral-400"
 							>
 								Remember me
 							</label>
 						</div>
-						<a
-							href="#"
+						<Link
+							href="/forgot-password"
 							className="text-sm text-blue-400 hover:text-blue-500 transition-colors"
 						>
 							Forgot password?
-						</a>
+						</Link>
 					</div>
 
 					<button
-						className="bg-gradient-to-br relative group/btn from-blue-600 via-purple-600 to-blue-800 block w-full text-white rounded-xl h-12 font-medium shadow-[0px_1px_0px_0px_#ffffff20_inset,0px_-1px_0px_0px_#ffffff20_inset] hover:shadow-blue-500/30 hover:scale-[1.02] transition-all duration-300"
+						className="bg-gradient-to-br relative group/btn from-blue-600 via-purple-600 to-blue-800 block w-full text-white rounded-xl h-12 font-medium shadow-[0px_1px_0px_0px_#ffffff20_inset,0px_-1px_0px_0px_#ffffff20_inset] hover:shadow-blue-500/30 hover:scale-[1.02] transition-all duration-300 disabled:opacity-70 disabled:hover:scale-100"
 						type="submit"
+						disabled={isSubmitting}
 					>
-						Sign in &rarr;
+						{isSubmitting ? (
+							<span className="flex items-center justify-center">
+								<Loader2 className="h-5 w-5 mr-2 animate-spin" />
+								Signing in...
+							</span>
+						) : (
+							<span>Sign in &rarr;</span>
+						)}
 						<BottomGradient />
 					</button>
 
@@ -105,6 +187,7 @@ export default function SigninForm() {
 								key={index}
 								className="relative group/btn flex items-center justify-center w-full rounded-xl h-12 font-medium bg-zinc-800/30 backdrop-blur-sm border border-zinc-800 hover:bg-zinc-800/70 hover:border-zinc-700 transition-all duration-300"
 								type="button"
+								disabled={isSubmitting}
 							>
 								<item.icon className="h-5 w-5 text-neutral-300 mr-2" />
 								<span className="text-neutral-300 text-sm">{item.text}</span>
