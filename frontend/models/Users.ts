@@ -1,11 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose"
-
-export enum UserRoles {
-    DESIGNER = "designer",
-    MANUFACTURER = "manufacturer",
-    SELLER = "seller",
-    USER = "user"
-}
+import { UserRoles } from "@/lib/constants/userRoles" // Import from the new location
 
 export interface IDesign {
     imgSrc: string
