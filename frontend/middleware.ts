@@ -1,67 +1,58 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
-import { verifyJWT } from "@/lib/auth/jwt"
 
 // Paths that don't require authentication
 const publicPaths = [
-   "/",
    "/signin",
    "/signup",
-   "/verification/:path*",
    "/forgot-password",
-   "/reset-password/:path*",
-   "/api/auth/:path*"
+   "/api/auth/signin",
+   "/api/auth/signup",
+   "/api/auth/refresh"
 ]
 
-export async function middleware(request: NextRequest) {
-   const { pathname } = request.nextUrl
-
-   // Check if the path is public
-   const isPublicPath = publicPaths.some(path => {
-      if (path.includes(":path*")) {
-         const basePath = path.split("/:path*")[0]
-         return pathname === basePath || pathname.startsWith(`${basePath}/`)
-      }
-      return pathname === path
-   })
-
-   if (isPublicPath) {
-      return NextResponse.next()
-   }
-
-   // Check for the access token in cookies
-   const accessToken = request.cookies.get("accessToken")?.value
-
-   // If no token is found, redirect to the signin page
-   if (!accessToken) {
-      const signinUrl = new URL("/signin", request.url)
-      signinUrl.searchParams.set("callbackUrl", pathname)
-      return NextResponse.redirect(signinUrl)
-   }
-
-   try {
-      // Verify the token
-      await verifyJWT(accessToken)
-      return NextResponse.next()
-   } catch (error) {
-      // If token verification fails, redirect to signin
-      console.error("JWT verification failed:", error)
-      
-      const signinUrl = new URL("/signin", request.url)
-      signinUrl.searchParams.set("callbackUrl", pathname)
-      return NextResponse.redirect(signinUrl)
-   }
+// Check if the current path is in the public paths list
+function isPublicPath(path: string): boolean {
+   return publicPaths.some(publicPath => 
+      path === publicPath || 
+      path.startsWith(`${publicPath}/`)
+   )
 }
 
+export function middleware(request: NextRequest) {
+   const { pathname } = request.nextUrl
+
+   // Allow API routes to handle their own authentication
+   if (pathname.startsWith("/api/") && !pathname.startsWith("/api/auth/me")) {
+      return NextResponse.next()
+   }
+
+   // Check if the path is public
+   if (isPublicPath(pathname)) {
+      return NextResponse.next()
+   }
+
+   // Check for authentication token
+   const accessToken = request.cookies.get("accessToken")?.value
+
+   // If no token found and the path requires authentication, redirect to signin
+   if (!accessToken && !isPublicPath(pathname)) {
+      const url = request.nextUrl.clone()
+      url.pathname = "/signin"
+      url.searchParams.set("from", pathname)
+      return NextResponse.redirect(url)
+   }
+
+   return NextResponse.next()
+}
+
+// Configure middleware to run on specific paths
 export const config = {
    matcher: [
-      /*
-       * Match all paths except:
-       * 1. /api/auth routes that handle authentication (to avoid infinite redirects)
-       * 2. /_next (Next.js internals)
-       * 3. /static or /public (static files)
-       * 4. .*\\..* (files with extensions like .js, .css, etc.)
-       */
-      "/((?!_next|static|public|.*\\..*|favicon.ico).*)"
+      // Match all request paths except for the ones starting with:
+      // - _next/static (static files)
+      // - _next/image (image optimization files)
+      // - favicon.ico (favicon file)
+      '/((?!_next/static|_next/image|favicon.ico).*)',
    ],
 }

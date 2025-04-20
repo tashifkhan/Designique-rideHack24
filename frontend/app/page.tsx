@@ -15,18 +15,6 @@ const Home: React.FC = () => {
 
 	// MongoDB connection and intersection observer setup
 	useEffect(() => {
-		const connectToMongoDB = async () => {
-			try {
-				const response = await fetch("/api/Mongo");
-				const data = await response.json();
-				console.log("Hi" + data.message);
-			} catch (error) {
-				console.error("Failed to connect to MongoDB", error);
-			}
-		};
-
-		connectToMongoDB();
-
 		const observer = new IntersectionObserver(
 			([entry]) => {
 				if (entry.isIntersecting) {
