@@ -101,7 +101,7 @@ export async function POST(req: Request) {
         email: user.email, 
         roles: Array.isArray(user.roles) ? user.roles.map((r: { toString: () => string }) => r.toString()) : [] 
       }
-    }, { status: 200 })
+    }, { status: 200 });
 
     response.cookies.set("refreshToken", refreshToken, {
       httpOnly: true,
@@ -118,6 +118,9 @@ export async function POST(req: Request) {
       maxAge: refreshTokenMaxAge,
       path: "/"
     });
+
+    const authChangeEvent = new Event("authChange");
+    dispatchEvent(authChangeEvent);
 
     return response;
   } catch (error) {

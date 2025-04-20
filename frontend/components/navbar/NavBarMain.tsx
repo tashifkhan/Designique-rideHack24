@@ -1,14 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import NavbarShop from "./NavBarShop";
+import { useAuth } from "@/lib/hooks/useAuth";
 
 const NavBarMain = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [showServices, setShowServices] = useState(false);
 	const pathname = usePathname();
+	const { isAuthenticated, isLoading } = useAuth();
 
 	const services = ["Designers", "Manufacturer", "Shop"];
 
@@ -138,12 +140,26 @@ const NavBarMain = () => {
 						</div>
 					</div>
 
-					{/* CTA Button */}
-					<Link href="/signup" className="hidden md:block">
-						<button className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:opacity-90 transition-opacity duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-							Get Started
-						</button>
-					</Link>
+					{/* CTA Button or Dashboard Icon */}
+					<div className="hidden md:block">
+						{!isLoading && (
+							<>
+								{isAuthenticated ? (
+									<Link href="/dashboard">
+										<button className="p-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:opacity-90 transition-opacity duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+											<LayoutDashboard size={20} />
+										</button>
+									</Link>
+								) : (
+									<Link href="/signup">
+										<button className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:opacity-90 transition-opacity duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+											Get Started
+										</button>
+									</Link>
+								)}
+							</>
+						)}
+					</div>
 				</div>
 			</div>
 			{pathname.startsWith("/shop") && <NavbarShop />}
