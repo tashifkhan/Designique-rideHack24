@@ -49,9 +49,9 @@ export async function POST(req: Request) {
 
     const accessSecret = process.env.JWT_ACCESS_SECRET;
     const refreshSecret = process.env.JWT_REFRESH_SECRET;
-    const accessTokenExpiry = process.env.ACCESS_TOKEN_EXPIRY ?? "15m"; // Use nullish coalescing for default
-    const refreshTokenExpiry = process.env.REFRESH_TOKEN_EXPIRY ?? "7d"; // Use nullish coalescing for default
-    const refreshTokenMaxAge = 60 * 60 * 24 * 7; // 7 days in seconds
+    const accessTokenExpiry = process.env.ACCESS_TOKEN_EXPIRY ?? "15m"; 
+    const refreshTokenExpiry = process.env.REFRESH_TOKEN_EXPIRY ?? "7d";
+    const refreshTokenMaxAge = 60 * 60 * 24 * 7; 
 
     if (!accessSecret || !refreshSecret) {
       console.error("JWT access or refresh secret environment variable is not set.");

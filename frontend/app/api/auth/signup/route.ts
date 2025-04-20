@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import connectMongo from "@/lib/db/connectMongo"
 import { User, UserRoles } from "@/models/Users"
 import bcrypt from "bcryptjs"
+import nodemailer from "nodemailer"
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -61,7 +62,36 @@ export async function POST (req: Request) {
 
     await newUser.save()
 
-    // TODO: Implement email verification token generation and sending email
+    // Generate email verification link and send email using nodemailer
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: process.env.SMTP_SECURE === "true",
+      auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+      }
+    })
+
+    const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/verify-email?token=${token}&email=${encodeURIComponent(email.toLowerCase())}`
+
+    try {
+      await transporter.sendMail({
+      from: process.env.SMTP_FROM || '"Designique" <no-reply@designique.com>',
+      to: email,
+      subject: "Verify your email address",
+      html: `
+        <p>Welcome to Designique!</p>
+        <p>Please verify your email address by clicking the link below:</p>
+        <a href="${verificationUrl}">${verificationUrl}</a>
+        <p>If you did not sign up, please ignore this email.</p>
+      `
+      })
+    } catch (err) {
+      console.error("Error sending verification email", err)
+      return NextResponse.json({ message: "Failed to send verification email" }, { status: 500 })
+    }
 
     return NextResponse.json({
       message: "User registered successfully. Please check your email to verify your account.", 
