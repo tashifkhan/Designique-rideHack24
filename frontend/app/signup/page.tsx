@@ -265,17 +265,27 @@ export default function SignupForm() {
 						"Registration successful! Please check your email to verify your account.",
 				});
 
-				// Redirect to verification pending page after 2 seconds
 				setTimeout(() => {
 					router.push(
 						"/verification-pending?email=" + encodeURIComponent(formData.email)
 					);
 				}, 2000);
 			} else {
-				setSubmitStatus({
-					success: false,
-					message: data.message || "Registration failed. Please try again.",
-				});
+				// Handle existing user more gracefully
+				if (response.status === 409) {
+					setSubmitStatus({
+						success: false,
+						message:
+							data.message ||
+							"This email is already registered. Try signing in instead.",
+					});
+					// Option to add a link to the sign-in page here
+				} else {
+					setSubmitStatus({
+						success: false,
+						message: data.message || "Registration failed. Please try again.",
+					});
+				}
 			}
 		} catch (error) {
 			console.error("Signup error:", error);

@@ -88,7 +88,8 @@ export async function POST (req: Request) {
         }
         
         return NextResponse.json({
-          message: "Account exists but was not verified. We've updated your info and resent the verification email.",
+          success: true,
+          message: "We've sent a new verification email to your address.",
           user: {
             id: existingUser._id,
             email: existingUser.email,
@@ -97,7 +98,10 @@ export async function POST (req: Request) {
         }, { status: 200 })
       }
       // User exists and is already verified
-      return NextResponse.json({ message: "User with this email already exists" }, { status: 409 }) 
+      return NextResponse.json({ 
+        success: false,
+        message: "An account with this email already exists. Please sign in instead." 
+      }, { status: 409 }) 
     }
 
     const salt = await bcrypt.genSalt(10)
