@@ -119,9 +119,6 @@ export async function POST(req: Request) {
       path: "/"
     });
 
-    const authChangeEvent = new Event("authChange");
-    dispatchEvent(authChangeEvent);
-
     return response;
   } catch (error) {
     console.error("Signin error:", error);
