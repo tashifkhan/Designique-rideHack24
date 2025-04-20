@@ -21,6 +21,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const roleOptions = [
 	{ id: UserRoles.USER, label: "Consumer", alwaysSelected: true },
@@ -88,6 +90,13 @@ export default function SignupForm() {
 			},
 		],
 	});
+
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [submitStatus, setSubmitStatus] = useState<{
+		success: boolean;
+		message: string;
+	} | null>(null);
+	const router = useRouter();
 
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -232,12 +241,51 @@ export default function SignupForm() {
 		});
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const payload = {
-			...formData,
-		};
-		console.log("Form Data Submitted:", payload);
+		setIsSubmitting(true);
+		setSubmitStatus(null);
+
+		try {
+			const response = await fetch("/api/auth/signup", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			});
+
+			const data = await response.json();
+
+			if (response.ok) {
+				setSubmitStatus({
+					success: true,
+					message:
+						data.message ||
+						"Registration successful! Please check your email to verify your account.",
+				});
+
+				// Redirect to verification pending page after 2 seconds
+				setTimeout(() => {
+					router.push(
+						"/verification-pending?email=" + encodeURIComponent(formData.email)
+					);
+				}, 2000);
+			} else {
+				setSubmitStatus({
+					success: false,
+					message: data.message || "Registration failed. Please try again.",
+				});
+			}
+		} catch (error) {
+			console.error("Signup error:", error);
+			setSubmitStatus({
+				success: false,
+				message: "An unexpected error occurred. Please try again.",
+			});
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	return (
@@ -939,27 +987,49 @@ export default function SignupForm() {
 							</LabelInputContainer>
 						</div>
 
+						{submitStatus && (
+							<div
+								className={`p-4 rounded-xl ${
+									submitStatus.success
+										? "bg-green-900/20 border border-green-500/30 text-green-300"
+										: "bg-red-900/20 border border-red-500/30 text-red-300"
+								}`}
+							>
+								{submitStatus.message}
+							</div>
+						)}
+
 						<motion.button
-							whileHover={{ scale: 1.01 }}
-							whileTap={{ scale: 0.98 }}
-							className="bg-gradient-to-br relative group/btn from-indigo-600 via-purple-600 to-blue-700 block w-full text-white rounded-xl h-12 font-medium shadow-[0_0_20px_rgba(79,70,229,0.2)] hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] transition-all duration-300"
+							whileHover={{ scale: isSubmitting ? 1 : 1.01 }}
+							whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+							className="bg-gradient-to-br relative group/btn from-indigo-600 via-purple-600 to-blue-700 block w-full text-white rounded-xl h-12 font-medium shadow-[0_0_20px_rgba(79,70,229,0.2)] hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] transition-all duration-300 disabled:opacity-70"
 							type="submit"
+							disabled={isSubmitting}
 						>
 							<span className="relative z-10 flex items-center justify-center">
-								<span>Sign up</span>
-								<svg
-									className="ml-2 w-5 h-5 group-hover/btn:translate-x-1 transition-transform"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M14 5l7 7m0 0l-7 7m7-7H3"
-									/>
-								</svg>
+								{isSubmitting ? (
+									<>
+										<Loader2 className="h-5 w-5 mr-2 animate-spin" />
+										<span>Processing...</span>
+									</>
+								) : (
+									<>
+										<span>Sign up</span>
+										<svg
+											className="ml-2 w-5 h-5 group-hover/btn:translate-x-1 transition-transform"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M14 5l7 7m0 0l-7 7m7-7H3"
+											/>
+										</svg>
+									</>
+								)}
 							</span>
 							<BottomGradient />
 						</motion.button>

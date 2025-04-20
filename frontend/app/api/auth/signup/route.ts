@@ -43,28 +43,60 @@ export async function POST (req: Request) {
     const existingUser = await User.findOne({ email: email.toLowerCase() })
     if (existingUser) {
       if (!existingUser.isVerified) {
-      existingUser.password = await bcrypt.hash(password, await bcrypt.genSalt(10))
-      existingUser.roles = validatedRoles
-      existingUser.token = Array.from(
-        { length: 16 },
-        () => "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"[Math.floor(Math.random() * 62)]
-      ).join("")
-      await existingUser.save()
-      try {
-        await sendVerificationEmail(existingUser.email, existingUser.token, existingUser._id.toString())
-      } catch (emailError) {
-        console.error("Error sending verification email:", emailError)
-      }
-      return NextResponse.json({
-        message: "Account exists but was not verified. We've updated your info and resent the verification email.",
-        user: {
-        id: existingUser._id,
-        email: existingUser.email,
-        roles: existingUser.roles,
-        token: existingUser.token
+        // Update existing unverified user with new data
+        existingUser.password = await bcrypt.hash(password, await bcrypt.genSalt(10))
+        existingUser.roles = validatedRoles
+        existingUser.token = Array.from(
+          { length: 16 },
+          () => "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"[Math.floor(Math.random() * 62)]
+        ).join("")
+        
+        // Update all fields from the body
+        if (body.firstname) existingUser.firstname = body.firstname
+        if (body.lastname) existingUser.lastname = body.lastname
+        
+        // Designer fields
+        if (validatedRoles.includes(UserRoles.DESIGNER)) {
+          if (body.specialisationDesigner) existingUser.specialisationDesigner = body.specialisationDesigner
+          if (body.bioDesigner) existingUser.bioDesigner = body.bioDesigner
+          if (body.portfolio) existingUser.portfolio = body.portfolio
+          if (body.socialMedia) existingUser.socialMedia = body.socialMedia
+          if (body.projectsCompleted) existingUser.projectsCompleted = body.projectsCompleted
         }
-      }, { status: 200 })
+        
+        // Manufacturer fields
+        if (validatedRoles.includes(UserRoles.MANUFACTURER)) {
+          if (body.name) existingUser.name = body.name
+          if (body.city) existingUser.city = body.city
+          if (body.minQuantity) existingUser.minQuantity = body.minQuantity
+          if (body.capacity) existingUser.capacity = body.capacity
+          if (body.price) existingUser.price = body.price
+        }
+        
+        // Seller fields
+        if (validatedRoles.includes(UserRoles.SELLER)) {
+          if (body.products) existingUser.products = body.products
+        }
+        
+        await existingUser.save()
+        
+        // Send a new verification email
+        try {
+          await sendVerificationEmail(existingUser.email, existingUser.token, existingUser._id.toString())
+        } catch (emailError) {
+          console.error("Error sending verification email:", emailError)
+        }
+        
+        return NextResponse.json({
+          message: "Account exists but was not verified. We've updated your info and resent the verification email.",
+          user: {
+            id: existingUser._id,
+            email: existingUser.email,
+            roles: existingUser.roles
+          }
+        }, { status: 200 })
       }
+      // User exists and is already verified
       return NextResponse.json({ message: "User with this email already exists" }, { status: 409 }) 
     }
 
