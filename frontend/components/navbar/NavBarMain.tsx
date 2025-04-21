@@ -10,7 +10,7 @@ const NavBarMain = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [showServices, setShowServices] = useState(false);
 	const pathname = usePathname();
-	const { isAuthenticated, isLoading } = useAuth();
+	const { isAuthenticated, isLoading, data } = useAuth();
 
 	const services = ["Designers", "Manufacturer", "Shop"];
 
@@ -158,25 +158,35 @@ const NavBarMain = () => {
 												<div className="p-3 border-b border-white/10">
 													<p className="text-sm text-gray-200">Signed in as</p>
 													<p className="font-medium text-purple-400 truncate">
-														User Name
+														{`${data.firstname} ${data.lastname}`}
 													</p>
 												</div>
 												<div className="py-1">
 													<Link
-														href="/profile"
+														href="/dashboard"
 														className="flex items-center px-4 py-2 text-gray-200 hover:text-purple-400 hover:bg-white/[0.05]"
 													>
 														<span>Profile</span>
 													</Link>
 													<Link
-														href="/settings"
+														href="/dashboard/settings"
 														className="flex items-center px-4 py-2 text-gray-200 hover:text-purple-400 hover:bg-white/[0.05]"
 													>
 														<span>Settings</span>
 													</Link>
 													<button
-														onClick={() => {
-															/* Add logout function */
+														onClick={async () => {
+															const [isLoggingOut, setIsLoggingOut] =
+																useState(false);
+															setIsLoggingOut(true);
+															try {
+																await fetch("/api/auth/signout");
+																window.location.href = "/";
+															} catch (error) {
+																console.error("Logout failed:", error);
+															} finally {
+																setIsLoggingOut(false);
+															}
 														}}
 														className="w-full text-left flex items-center px-4 py-2 text-gray-200 hover:text-red-400 hover:bg-white/[0.05]"
 													>

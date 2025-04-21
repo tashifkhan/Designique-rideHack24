@@ -15,8 +15,8 @@ export interface IProduct {
 }
 
 export interface IUser extends Document {
-    firstName: string
-    lastName: string
+    firstname: string
+    lastname: string
     email: string
     password: string
     isVerified: boolean
@@ -72,12 +72,12 @@ const productSchema = new Schema<IProduct>(
 
 const userSchema = new Schema<IUser>(
     {
-        firstName: {
+        firstname: {
             type: String,
             required: true,
             trim: true
         },
-        lastName: {
+        lastname: {
             type: String,
             required: true,
             trim: true

@@ -34,6 +34,8 @@ export async function POST(req: Request) {
 
     const accessTokenPayload = {
       id: user._id.toString(),
+      firstname: user.firstname,
+      lastname: user.lastname,
       email: user.email,
       roles: Array.isArray(user.roles) ? user.roles.map((r: { toString: () => any; }) => r.toString()) : [],
       isVerified: !!user.isVerified

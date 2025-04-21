@@ -38,6 +38,8 @@ export async function GET() {
       interface UserResponse {
          user: {
          id: string,
+         firstname: string,
+         lastname: string,
          email: string,
          roles: string[]
          }
@@ -46,6 +48,8 @@ export async function GET() {
       return NextResponse.json<UserResponse>({
          user: {
          id: user._id.toString(),
+         firstname: user.firstname,
+         lastname: user.lastname,
          email: user.email,
          roles: Array.isArray(user.roles) ? user.roles.map((r: unknown) => (r as string).toString()) : []
          }
