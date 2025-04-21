@@ -10,6 +10,7 @@ export async function GET() {
       const cookieStore = cookies()
       const accessToken = cookieStore.get("accessToken")?.value
 
+
       if (!accessToken) {
          return NextResponse.json({ message: "Unauthorized: No token provided" }, { status: 401 })
       }
@@ -24,12 +25,7 @@ export async function GET() {
       }
 
       // Connect to MongoDB
-      try {
-         await connectMongo()
-      } catch (error) {
-         console.error("Error connecting to MongoDB", error)
-         return NextResponse.json({ message: "Failed to connect to database" }, { status: 500 })
-      }
+      await connectMongo()
 
       // Get user data from database
       const user = await User.findById(payload.id).select("-password")

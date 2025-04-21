@@ -145,14 +145,50 @@ const NavBarMain = () => {
 						{!isLoading && (
 							<>
 								{isAuthenticated ? (
-									<Link href="/dashboard">
-										<button className="p-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:opacity-90 transition-opacity duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-											<LayoutDashboard size={20} />
-										</button>
-									</Link>
+									<div className="flex items-center space-x-3">
+										<div className="group relative">
+											<Link
+												href="/dashboard"
+												className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:shadow-lg transition-all duration-300"
+											>
+												<LayoutDashboard size={18} />
+												<span className="font-medium">Dashboard</span>
+											</Link>
+											<div className="absolute right-0 mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 bg-white/10 backdrop-blur-md rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-white/20 z-50">
+												<div className="p-3 border-b border-white/10">
+													<p className="text-sm text-gray-200">Signed in as</p>
+													<p className="font-medium text-purple-400 truncate">
+														User Name
+													</p>
+												</div>
+												<div className="py-1">
+													<Link
+														href="/profile"
+														className="flex items-center px-4 py-2 text-gray-200 hover:text-purple-400 hover:bg-white/[0.05]"
+													>
+														<span>Profile</span>
+													</Link>
+													<Link
+														href="/settings"
+														className="flex items-center px-4 py-2 text-gray-200 hover:text-purple-400 hover:bg-white/[0.05]"
+													>
+														<span>Settings</span>
+													</Link>
+													<button
+														onClick={() => {
+															/* Add logout function */
+														}}
+														className="w-full text-left flex items-center px-4 py-2 text-gray-200 hover:text-red-400 hover:bg-white/[0.05]"
+													>
+														<span>Logout</span>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
 								) : (
 									<Link href="/signup">
-										<button className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:opacity-90 transition-opacity duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+										<button className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:shadow-lg hover:scale-105 transition-all duration-300">
 											Get Started
 										</button>
 									</Link>
