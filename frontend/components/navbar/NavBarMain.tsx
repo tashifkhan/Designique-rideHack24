@@ -9,6 +9,7 @@ import { useAuth } from "@/lib/hooks/useAuth";
 const NavBarMain = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [showServices, setShowServices] = useState(false);
+	const [isLoggingOut, setIsLoggingOut] = useState(false);
 	const pathname = usePathname();
 	const { isAuthenticated, isLoading, data } = useAuth();
 
@@ -176,8 +177,6 @@ const NavBarMain = () => {
 													</Link>
 													<button
 														onClick={async () => {
-															const [isLoggingOut, setIsLoggingOut] =
-																useState(false);
 															setIsLoggingOut(true);
 															try {
 																await fetch("/api/auth/signout");
@@ -189,8 +188,11 @@ const NavBarMain = () => {
 															}
 														}}
 														className="w-full text-left flex items-center px-4 py-2 text-gray-200 hover:text-red-400 hover:bg-white/[0.05]"
+														disabled={isLoggingOut}
 													>
-														<span>Logout</span>
+														<span>
+															{isLoggingOut ? "Logging out..." : "Logout"}
+														</span>
 													</button>
 												</div>
 											</div>

@@ -7,14 +7,17 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
 import Link from "next/link";
 import PlaceholdersAndVanishInputDemo from "../Manufacturer/Serach";
+import { useAuth } from "@/lib/hooks/useAuth";
 
 export default function NavbarShop() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isSerOpen, setIsSerOpen] = useState(false);
 	const [showServices, setShowServices] = useState(false);
 	const [showKnowMore, setShowKnowMore] = useState(false);
+	const [isLoggingOut, setIsLoggingOut] = useState(false);
 	const services = ["Designers", "Manufacturer", "Shop"];
 	const router = useRouter();
+	const { isAuthenticated, isLoading, data } = useAuth();
 
 	return (
 		<div className="fixed w-full z-50 backdrop-blur-lg bg-black/20 border-b border-white/10">
@@ -137,6 +140,46 @@ export default function NavbarShop() {
 											</div>
 										)}
 									</div>
+
+									{/* Mobile Auth Buttons (inside Sheet) */}
+									{!isLoading && (
+										<div className="flex flex-col gap-2 mt-6">
+											{isAuthenticated ? (
+												<>
+													<Link href="/dashboard">
+														<button className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:shadow-lg transition-all duration-300 w-full">
+															<span>Dashboard</span>
+														</button>
+													</Link>
+													<button
+														onClick={async () => {
+															setIsLoggingOut(true);
+															try {
+																await fetch("/api/auth/signout");
+																window.location.href = "/";
+															} catch (error) {
+																console.error("Logout failed:", error);
+															} finally {
+																setIsLoggingOut(false);
+															}
+														}}
+														disabled={isLoggingOut}
+														className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-500 to-pink-500 text-white hover:shadow-lg transition-all duration-300 w-full"
+													>
+														<span>
+															{isLoggingOut ? "Logging out..." : "Logout"}
+														</span>
+													</button>
+												</>
+											) : (
+												<Link href="/signup">
+													<button className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 w-full">
+														Get Started
+													</button>
+												</Link>
+											)}
+										</div>
+									)}
 								</nav>
 							</SheetContent>
 						</Sheet>
@@ -256,6 +299,44 @@ export default function NavbarShop() {
 								)}
 							</div>
 						</nav>
+
+						{/* Desktop Auth Buttons */}
+						{!isLoading && (
+							<div className="hidden lg:flex items-center gap-4 ml-4">
+								{isAuthenticated ? (
+									<>
+										<Link href="/dashboard">
+											<button className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:shadow-lg transition-all duration-300">
+												<span>Dashboard</span>
+											</button>
+										</Link>
+										<button
+											onClick={async () => {
+												setIsLoggingOut(true);
+												try {
+													await fetch("/api/auth/signout");
+													window.location.href = "/";
+												} catch (error) {
+													console.error("Logout failed:", error);
+												} finally {
+													setIsLoggingOut(false);
+												}
+											}}
+											disabled={isLoggingOut}
+											className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-500 to-pink-500 text-white hover:shadow-lg transition-all duration-300"
+										>
+											<span>{isLoggingOut ? "Logging out..." : "Logout"}</span>
+										</button>
+									</>
+								) : (
+									<Link href="/signup">
+										<button className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:shadow-lg hover:scale-105 transition-all duration-300">
+											Get Started
+										</button>
+									</Link>
+								)}
+							</div>
+						)}
 					</div>
 
 					<div className="flex items-center gap-4">
