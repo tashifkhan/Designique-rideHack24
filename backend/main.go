@@ -1,53 +1,49 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
+	"os"
 
-	"github.com/gorilla/websocket"
+	"github.com/tashifkhan/Designique-rideHack24/backend/db"
+	"github.com/tashifkhan/Designique-rideHack24/backend/server"
 )
 
-// upgrader upgrades an HTTP connection to a WebSocket,
-// here we allow all origins for simplicity (adjust in prod).
-var upgrader = websocket.Upgrader{
-	CheckOrigin: func(r *http.Request) bool {
-		return true
-	},
-}
-
-// wsHandler handles WebSocket requests on /ws.
-func wsHandler(w http.ResponseWriter, r *http.Request) {
-	// 1) Upgrade HTTP → WebSocket
-	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Println("Upgrade error:", err)
-		return
-	}
-	defer conn.Close()
-
-	// 2) Read messages in a loop and echo them back
-	for {
-		msgType, msg, err := conn.ReadMessage()
-		if err != nil {
-			log.Println("Read error:", err)
-			break
-		}
-		log.Printf("Received: %s\n", msg)
-
-		response := fmt.Sprintf("You said: %s", msg)
-		if err := conn.WriteMessage(msgType, []byte(response)); err != nil {
-			log.Println("Write error:", err)
-			break
-		}
-	}
-}
-
 func main() {
-	http.HandleFunc("/ws", wsHandler)
+	// Initialize MongoDB connection
+	db.InitMongo()
 
-	port := "8080"
-	log.Printf("WebSocket server listening on :%s/ws\n", port)
+	// Create WebSocket hub
+	hub := server.NewHub()
+	go hub.Run()
+
+	// Set up HTTP routes
+	http.HandleFunc("/ws", server.WSHandler(hub))
+	http.HandleFunc("/upload", server.UploadHandler)
+	http.HandleFunc("/push/subscribe", server.PushSubscribeHandler)
+
+	// Serve uploaded files
+	uploadDir := os.Getenv("UPLOAD_DIR")
+	if uploadDir == "" {
+		uploadDir = "./uploads"
+	}
+	http.Handle("/uploads/",
+		http.StripPrefix("/uploads/",
+			http.FileServer(http.Dir(uploadDir))),
+	)
+
+	// Get port from environment or use default
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	log.Printf("Chat server starting on port :%s", port)
+	log.Printf("WebSocket endpoint: ws://localhost:%s/ws", port)
+	log.Printf("File upload endpoint: http://localhost:%s/upload", port)
+	log.Printf("Push subscription endpoint: http://localhost:%s/push/subscribe", port)
+	log.Printf("File serving: http://localhost:%s/uploads/", port)
+
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatal("ListenAndServe:", err)
 	}
