@@ -42,11 +42,8 @@ Designique aims to bridge this critical B2B gap by establishing a reputable mark
 **Team**
 
 - Tashif Ahmad Khan (22102141) - Sophomore ECE A6
-- Aman Tyagi (9922103176) - Sophomore CSE F4
 - Adarsh Sharma (9922103090) - Sophomore CSE F4
-- Angel Singhal (9922103062) - Sophomore CSE F3
-- Dhruv Mishra (9922103112) - Sophomore CSE F4
-- Adhiraj Gupta (9922103096) - Sophomore CSE F4
+
 
 **Get Involved**
 

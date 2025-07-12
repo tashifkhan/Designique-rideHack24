@@ -38,7 +38,7 @@ const Home: React.FC = () => {
 	}, []);
 
 	const words = [{ text: "Designers +" }, { text: "Manufacturers" }];
-	const words2 = [{ text: "UnderDogs", className: "text-blue-500" }];
+	const words2 = [{ text: "Built by Tashif & Adarsh", className: "text-blue-500" }];
 
 	const testimonials = [
 		{

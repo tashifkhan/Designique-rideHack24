@@ -20,34 +20,7 @@ const teamMembers = [
 		github: "https://github.com/adarshsharma3",
 		linkedin: "https://www.linkedin.com/in/adarsh-sharma-3bb87027b",
 	},
-	{
-		name: "Aman",
-		role: "#SmartWorker",
-		image: "/aman-avatar.jpg",
-		github: "https://github.com/AmanTyagi3123",
-		linkedin: "https://www.linkedin.com/in/aman-tyagi-677377270",
-	},
-	{
-		name: "Angel",
-		role: "#Entrepreneur",
-		image: "/angel-avatar.jpg",
-		github: "https://github.com/angelsinghal",
-		linkedin: "https://www.linkedin.com/in/angel-singhal-44b372248",
-	},
-	{
-		name: "Dhruv",
-		role: "#CodeHustler",
-		image: "/dhruv-avatar.jpg",
-		github: "https://github.com/dhruvmishra1020",
-		linkedin: "#",
-	},
-	{
-		name: "Adhiraj",
-		role: "#MultiTasker",
-		image: "/adhiraj-avatar.jpg",
-		github: "https://github.com/Adhiraj-3",
-		linkedin: "https://www.linkedin.com/in/adhiraj-gupta-777a7a270",
-	},
+	
 ];
 
 export default function TeamSection() {

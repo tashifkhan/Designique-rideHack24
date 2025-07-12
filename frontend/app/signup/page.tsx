@@ -363,7 +363,7 @@ export default function SignupForm() {
 							<Input
 								id="firstname"
 								name="firstname"
-								placeholder="Tashif Ahmad"
+								placeholder="Tashif/Adarsh"
 								type="text"
 								value={formData.firstname}
 								onChange={handleChange}
@@ -380,7 +380,7 @@ export default function SignupForm() {
 							<Input
 								id="lastname"
 								name="lastname"
-								placeholder="Khan"
+								placeholder="Khan/Sharma"
 								type="text"
 								value={formData.lastname}
 								onChange={handleChange}
