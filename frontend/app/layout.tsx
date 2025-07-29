@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import NavBarMain from "@/components/navbar/NavBarMain";
 import Footer from "@/components/Footer";
+import { ChatProviderWrapper } from "@/components/providers/ChatProviderWrapper";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,9 +20,11 @@ export default function RootLayout({
 			<body
 				className={`antialiased bg-gradient-to-br from-slate-900 via-[#000] to-slate-900`}
 			>
-				<NavBarMain />
-				{children}
-				<Footer />
+				<ChatProviderWrapper>
+					<NavBarMain />
+					{children}
+					<Footer />
+				</ChatProviderWrapper>
 			</body>
 		</html>
 	);

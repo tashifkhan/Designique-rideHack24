@@ -67,3 +67,11 @@ next-env.d.ts
 
 FirebaseConfig.js
 .github
+
+
+# Go
+config.env
+chat-server
+websocket.md
+backend/README.md
+

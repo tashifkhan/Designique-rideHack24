@@ -5,6 +5,9 @@ import { designers } from "@/lib/data/designers";
 import Link from "next/link";
 
 export default function TopDesigners() {
+	// In a real app, this would come from authentication context
+	const mockUserId = "507f1f77bcf86cd799439011";
+
 	return (
 		<section className="mt-16">
 			<div className="flex justify-between mb-8">
@@ -32,7 +35,11 @@ export default function TopDesigners() {
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{designers.map((designer) => (
-					<DesignerCard key={designer.id} designer={designer} />
+					<DesignerCard
+						key={designer.id}
+						designer={designer}
+						userId={mockUserId}
+					/>
 				))}
 			</div>
 		</section>

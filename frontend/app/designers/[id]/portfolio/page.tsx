@@ -16,123 +16,161 @@ interface Design {
 }
 
 export default function DesignerPortfolioPage() {
-	const [selectedCategory, setSelectedCategory] = useState("all");
+	const params = useParams();
+	const id = params.id as string;
+	const designer = designers[parseInt(id) - 1];
+	const [selectedCategory, setSelectedCategory] = useState<string>("all");
 	const [showChat, setShowChat] = useState(false);
-	const id = useParams().id as string;
 
-	const designer = {
-		id: "1",
-		name: "John Doe",
-		designs: [
-			{
-				id: "1",
-				title: "Project 1",
-				imageUrl:
-					"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80",
-				description: "Description for project 1",
-				category: "ui/ux",
-			},
-		],
-	};
+	// In a real app, this would come from authentication context
+	const mockUserId = "507f1f77bcf86cd799439011";
+
+	// Mock designs data - in a real app, this would come from an API
+	const designs: Design[] = [
+		{
+			id: "1",
+			title: "Modern Minimalist Dress",
+			imageUrl: "/api/placeholder/400/300",
+			description:
+				"A sleek, minimalist dress with clean lines and contemporary appeal.",
+			category: "dresses",
+		},
+		{
+			id: "2",
+			title: "Bohemian Summer Collection",
+			imageUrl: "/api/placeholder/400/300",
+			description: "Free-spirited designs perfect for summer adventures.",
+			category: "summer",
+		},
+		{
+			id: "3",
+			title: "Evening Gown Elegance",
+			imageUrl: "/api/placeholder/400/300",
+			description: "Sophisticated evening wear for special occasions.",
+			category: "evening",
+		},
+		{
+			id: "4",
+			title: "Casual Street Style",
+			imageUrl: "/api/placeholder/400/300",
+			description: "Comfortable yet stylish everyday wear.",
+			category: "casual",
+		},
+		{
+			id: "5",
+			title: "Winter Collection",
+			imageUrl: "/api/placeholder/400/300",
+			description: "Warm and cozy designs for the winter season.",
+			category: "winter",
+		},
+		{
+			id: "6",
+			title: "Bridal Collection",
+			imageUrl: "/api/placeholder/400/300",
+			description: "Dreamy wedding dresses for the perfect day.",
+			category: "bridal",
+		},
+	];
+
+	const categories = [
+		"all",
+		"dresses",
+		"summer",
+		"evening",
+		"casual",
+		"winter",
+		"bridal",
+	];
 
 	const filteredDesigns =
 		selectedCategory === "all"
-			? designer.designs
-			: designer.designs.filter(
-					(design) => design.category === selectedCategory
-			  );
+			? designs
+			: designs.filter((design) => design.category === selectedCategory);
+
+	if (!designer) {
+		return <div>Designer not found</div>;
+	}
 
 	return (
 		<>
-			<div className="min-h-screen bg-gradient-to-br from-slate-800 via-[#000] to-slate-900 p-4 sm:p-6 md:p-8">
-				{/* Glass Header */}
-				<motion.div
-					className="absolute top-[13%] left-[30%] w-[40%] h-[40%] rounded-full bg-purple-500/20 blur-[100px]"
-					animate={{ x: [0, 50, -50, 0], y: [0, -50, 50, 0] }}
-					transition={{ duration: 10, repeat: Infinity }}
-				/>
-				<motion.div
-					className="absolute bottom-[10%] right-[10%] w-[60%] h-[40%] rounded-full bg-blue-800/20 blur-[100px]"
-					animate={{ x: [0, -50, 50, 0], y: [0, 50, -50, 0] }}
-					transition={{ duration: 10, repeat: Infinity }}
-				/>
-				<div className="backdrop-blur-lg bg-black/40 rounded-2xl p-4 sm:p-6 md:p-8 mb-8 shadow-2xl mt-16 border border-white/10 hover:bg-black/50 transition-all duration-300">
-					<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-						<h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/90">
+			<main className="min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+					{/* Header */}
+					<div className="text-center mb-12">
+						<h1 className="text-4xl font-bold text-white mb-4">
 							{designer.name}'s Portfolio
 						</h1>
-						<div className="flex gap-2 sm:gap-4 w-full sm:w-auto">
-							<button className="flex-1 sm:flex-none px-4 sm:px-6 py-2 border border-white/30 text-white rounded-full hover:bg-white/10 transition backdrop-blur-sm text-sm sm:text-base">
-								Follow
-							</button>
-							<Button
-								onClick={(e) => {
-									e.stopPropagation();
-									setShowChat(true);
-								}}
-								className="flex-1 sm:flex-none px-4 sm:px-6 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition backdrop-blur-sm text-sm sm:text-base"
-							>
-								Chat
-							</Button>
-						</div>
+						<p className="text-gray-400 text-lg max-w-2xl mx-auto">
+							Explore the creative journey and stunning designs from{" "}
+							{designer.name}
+						</p>
 					</div>
-					<div className="flex flex-wrap gap-2 sm:gap-4 mt-4">
-						{["all", "ui/ux", "branding", "illustration"].map((category) => (
-							<button
+
+					{/* Category Filter */}
+					<div className="flex flex-wrap justify-center gap-4 mb-8">
+						{categories.map((category) => (
+							<Button
 								key={category}
 								onClick={() => setSelectedCategory(category)}
-								className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl backdrop-blur-md transition-all duration-300 text-xs sm:text-sm
-								${
+								className={`px-6 py-2 rounded-full transition-all duration-300 ${
 									selectedCategory === category
-										? "bg-white/20 text-white"
-										: "bg-white/5 text-white/70 hover:bg-white/10"
+										? "bg-purple-600 text-white"
+										: "bg-white/10 text-gray-300 hover:bg-white/20"
 								}`}
 							>
-								{category.toUpperCase()}
-							</button>
+								{category.charAt(0).toUpperCase() + category.slice(1)}
+							</Button>
+						))}
+					</div>
+
+					{/* Chat Button */}
+					<div className="flex justify-center mb-8">
+						<Button
+							onClick={() => setShowChat(true)}
+							className="px-8 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full hover:from-purple-600 hover:to-blue-600 transition-all duration-300"
+						>
+							Chat with {designer.name}
+						</Button>
+					</div>
+
+					{/* Designs Grid */}
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+						{filteredDesigns.map((design) => (
+							<motion.div
+								key={design.id}
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								whileHover={{ scale: 1.02 }}
+								className="group relative overflow-hidden rounded-xl backdrop-blur-lg bg-white/5"
+							>
+								<div className="aspect-video relative">
+									<Image
+										src={design.imageUrl}
+										alt={design.title}
+										fill
+										className="object-cover"
+									/>
+									<div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+										<div className="p-4 sm:p-6 h-full flex flex-col justify-end">
+											<h3 className="text-lg sm:text-xl font-bold text-white mb-2">
+												{design.title}
+											</h3>
+											<p className="text-white/80 text-xs sm:text-sm">
+												{design.description}
+											</p>
+										</div>
+									</div>
+								</div>
+							</motion.div>
 						))}
 					</div>
 				</div>
-				{/* Portfolio Grid */}
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-					{filteredDesigns.map((design) => (
-						<motion.div
-							key={design.id}
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							whileHover={{ scale: 1.02 }}
-							className="group relative overflow-hidden rounded-xl backdrop-blur-lg bg-white/5"
-						>
-							<div className="aspect-video relative">
-								<Image
-									src={design.imageUrl}
-									alt={design.title}
-									fill
-									className="object-cover"
-								/>
-								<div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-									<div className="p-4 sm:p-6 h-full flex flex-col justify-end">
-										<h3 className="text-lg sm:text-xl font-bold text-white mb-2">
-											{design.title}
-										</h3>
-										<p className="text-white/80 text-xs sm:text-sm">
-											{design.description}
-										</p>
-									</div>
-								</div>
-							</div>
-						</motion.div>
-					))}
-				</div>
-			</div>
+			</main>
 			<ChatModal
 				designer={designers[parseInt(id) - 1]}
 				open={showChat}
 				onClose={() => setShowChat(false)}
-				onSend={(message) => {
-					// Handle the message sending logic here
-					console.log("Sending message:", message);
-				}}
+				userId={mockUserId}
 			/>
 		</>
 	);

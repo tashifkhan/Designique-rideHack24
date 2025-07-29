@@ -3,6 +3,9 @@ import { manufacturers } from "@/lib/data/manufacturer";
 import ManufacturerCard from "./ManfacturerCard";
 
 const TopManufacturers = () => {
+	// In a real app, this would come from authentication context
+	const mockUserId = "507f1f77bcf86cd799439011";
+
 	return (
 		<section className="mt-16">
 			<div className="flex justify-between items-center mb-8">
@@ -28,7 +31,11 @@ const TopManufacturers = () => {
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{manufacturers.map((manufacturer) => (
-					<ManufacturerCard key={manufacturer.id} manufacturer={manufacturer} />
+					<ManufacturerCard
+						key={manufacturer.id}
+						manufacturer={manufacturer}
+						userId={mockUserId}
+					/>
 				))}
 			</div>
 		</section>

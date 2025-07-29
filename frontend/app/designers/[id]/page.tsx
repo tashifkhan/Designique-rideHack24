@@ -12,12 +12,20 @@ type Props = {
 };
 
 function DesignerPage({ params }: Props) {
-	const id = params.id;
-	const router = useRouter();
-	const [showChat, setShowChat] = useState(false);
+	const { id } = params;
 	const designer = designers[parseInt(id) - 1];
+	const [showChat, setShowChat] = useState(false);
+	const router = useRouter();
+
+	// In a real app, this would come from authentication context
+	const mockUserId = "507f1f77bcf86cd799439011";
+
+	if (!designer) {
+		return <div>Designer not found</div>;
+	}
+
 	return (
-		<main className="min-h-screen bg-gradient-to-br from-slate-900 via-[#000] to-slate-900">
+		<main className="min-h-screen bg-gray-900">
 			{/* cover image */}
 			<div className="relative h-80 w-full">
 				<Image
@@ -71,54 +79,51 @@ function DesignerPage({ params }: Props) {
 					</div>
 
 					{/* Designer stats */}
-					<div className="grid grid-cols-3 gap-8">
-						<div className="text-center p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
-							<div className="text-2xl font-bold text-white">
-								{designer.following}
-							</div>
-							<div className="text-gray-300">Projects</div>
-						</div>
-						<div className="text-center p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
-							<div className="text-2xl font-bold text-white">
-								{designer.followers}
-							</div>
-							<div className="text-gray-300">Followers</div>
-						</div>
-						<div className="text-center p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
-							<div className="text-2xl font-bold text-white">
+					<div className="grid grid-cols-3 gap-4">
+						<div className="text-center p-4 bg-white/5 rounded-xl">
+							<div className="text-2xl font-bold text-purple-400">
 								{designer.collections}
 							</div>
-							<div className="text-gray-300">Rating</div>
+							<div className="text-sm text-gray-400">Collections</div>
+						</div>
+						<div className="text-center p-4 bg-white/5 rounded-xl">
+							<div className="text-2xl font-bold text-blue-400">
+								{designer.followers}
+							</div>
+							<div className="text-sm text-gray-400">Followers</div>
+						</div>
+						<div className="text-center p-4 bg-white/5 rounded-xl">
+							<div className="text-2xl font-bold text-green-400">
+								{designer.following}
+							</div>
+							<div className="text-sm text-gray-400">Following</div>
 						</div>
 					</div>
 
-					{/* Specialisation details */}
-					<div className="space-y-6">
-						<div className="p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
-							<h2 className="text-xl font-semibold text-white mb-2">
-								Specialization
-							</h2>
-							<p className="text-gray-300">{designer.specialization}</p>
-						</div>
+					{/* Bio */}
+					<div className="bg-white/5 p-6 rounded-xl backdrop-blur-sm">
+						<h3 className="text-lg font-semibold mb-3 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+							About
+						</h3>
+						<p className="text-gray-200">{designer.bio}</p>
+					</div>
 
-						{/* Bio details */}
-						<div className="p-4 rounded-2xl border border-gray-700/30 bg-gray-800/30 backdrop-blur-sm">
-							<h2 className="text-xl font-semibold text-white mb-2">Bio</h2>
-							<p className="text-gray-300">{designer.bio}</p>
-						</div>
+					{/* Specialization */}
+					<div className="bg-white/5 p-6 rounded-xl backdrop-blur-sm">
+						<h3 className="text-lg font-semibold mb-3 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+							Specialization
+						</h3>
+						<p className="text-gray-200">{designer.specialization}</p>
+					</div>
 
-						{/* action buttons */}
-						<div className="flex gap-3">
-							<button
-								onClick={() => router.push(`${params.id}/portfolio`)}
-								className="flex-1 px-6 py-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition backdrop-blur-sm"
-							>
-								View Portfolio
-							</button>
-							<button className="flex-1 px-6 py-3 border border-white/30 text-white rounded-full hover:bg-white/10 transition backdrop-blur-sm">
-								Social Profiles
-							</button>
-						</div>
+					{/* Action buttons */}
+					<div className="flex justify-center space-x-4">
+						<button
+							onClick={() => router.push(`/designers/${id}/portfolio`)}
+							className="px-8 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full hover:from-purple-600 hover:to-blue-600 transition-all duration-300"
+						>
+							View Portfolio
+						</button>
 					</div>
 				</div>
 			</div>
@@ -126,10 +131,7 @@ function DesignerPage({ params }: Props) {
 				designer={designers[parseInt(id) - 1]}
 				open={showChat}
 				onClose={() => setShowChat(false)}
-				onSend={(message) => {
-					// Handle the message sending logic here
-					console.log("Sending message:", message);
-				}}
+				userId={mockUserId}
 			/>
 		</main>
 	);

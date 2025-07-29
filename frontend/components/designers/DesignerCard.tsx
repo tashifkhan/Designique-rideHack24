@@ -11,9 +11,10 @@ import Image from "next/image";
 
 interface DesignerCardProps {
 	designer: Designer;
+	userId: string;
 }
 
-export default function DesignerCard({ designer }: DesignerCardProps) {
+export default function DesignerCard({ designer, userId }: DesignerCardProps) {
 	const [showDetails, setShowDetails] = useState(false);
 	const [showChat, setShowChat] = useState(false);
 
@@ -56,57 +57,39 @@ export default function DesignerCard({ designer }: DesignerCardProps) {
 					<p className="text-gray-300 mb-4 text-sm md:text-base">
 						{designer.specialization}
 					</p>
-					<div className="flex flex-col md:flex-row items-start md:items-center justify-between">
-						<div className="flex space-x-4 mb-2 md:mb-0">
+
+					<div className="flex items-center justify-between">
+						<div className="flex items-center space-x-4">
 							<Button
-								variant="ghost"
-								size="icon"
-								onClick={(e) => {
-									e.stopPropagation();
-									// Handle like
-								}}
-								className="hover:bg-blue-300/20 rounded-2xl hover:backdrop-blur-sm transition-all"
-							>
-								<Heart className="h-5 w-5 text-gray-400" />
-							</Button>
-							<Button
-								variant="ghost"
-								size="icon"
+								size="sm"
 								onClick={(e) => {
 									e.stopPropagation();
 									setShowChat(true);
 								}}
-								className="hover:bg-blue-300/20 rounded-2xl hover:backdrop-blur-sm transition-all"
+								className="bg-purple-600 hover:bg-purple-700 text-white rounded-full px-4 py-2"
 							>
-								<MessageCircle className="h-5 w-5 text-gray-400" />
+								<MessageCircle className="h-4 w-4 mr-2" />
+								Chat
 							</Button>
 							<Button
-								variant="ghost"
-								size="icon"
-								onClick={async (e) => {
-									e.stopPropagation();
-									try {
-										if (navigator.share) {
-											await navigator.share({
-												title: designer.name,
-												text: `Check out ${designer.name}'s design portfolio`,
-												url: `${window.location.href}/${designer.id}`,
-											});
-										} else {
-											await navigator.clipboard.writeText(
-												`${window.location.href}/${designer.id}`
-											);
-											alert("Link copied to clipboard!");
-										}
-									} catch (error) {
-										console.log("Error sharing:", error);
-									}
-								}}
-								className="hover:bg-blue-300/20 rounded-2xl hover:backdrop-blur-sm transition-all"
+								size="sm"
+								variant="outline"
+								className="border-white/20 text-white hover:bg-white/10 rounded-full px-4 py-2"
 							>
-								<Share2 className="h-5 w-5 text-gray-400" />
+								<Heart className="h-4 w-4 mr-2" />
+								Follow
 							</Button>
 						</div>
+						<Button
+							size="sm"
+							variant="ghost"
+							className="text-gray-400 hover:text-white"
+						>
+							<Share2 className="h-4 w-4" />
+						</Button>
+					</div>
+
+					<div className="mt-4 pt-4 border-t border-white/10">
 						<div className="flex items-center space-x-4 text-gray-400">
 							<div className="flex items-center">
 								<BookOpen className="h-4 w-4 mr-1" />
@@ -125,16 +108,14 @@ export default function DesignerCard({ designer }: DesignerCardProps) {
 				designer={designer}
 				open={showDetails}
 				onClose={() => setShowDetails(false)}
+				userId={userId}
 			/>
 
 			<ChatModal
 				designer={designer}
 				open={showChat}
 				onClose={() => setShowChat(false)}
-				onSend={(message) => {
-					// Handle the message sending logic here
-					console.log("Sending message:", message);
-				}}
+				userId={userId}
 			/>
 		</>
 	);
